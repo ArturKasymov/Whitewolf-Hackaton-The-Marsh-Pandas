@@ -30,4 +30,8 @@ public class Interactor implements LoginInteractor {
         List<Product> list_product=provider.getUserFridgeProducts(user_token);
         return list_product;
     }
+
+    public void addProductToUserFridge(int product_id,int user_token, int ilosc){
+        provider.addProductToUserFridge(product_id, user_token, ilosc);
+    }
 }
