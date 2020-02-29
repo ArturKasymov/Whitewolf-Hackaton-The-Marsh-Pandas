@@ -31,7 +31,7 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
     private Interactor() throws Exception {
         this.provider = new DatabaseProvider();
 
-        utils.insertProducts();
+        //utils.insertProducts();
 
     }
 
