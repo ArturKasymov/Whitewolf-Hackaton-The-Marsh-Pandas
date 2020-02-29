@@ -95,6 +95,8 @@ public class PostgreSQLQueries {
 
     public static final String DODAJ_SKLEP = "INSERT INTO sklepy(nazwa) VALUES(?) RETURNING id_sklepu;";
 
+    public static final String DODAJ_PRODUKTY_UZYTKOWNIKA = "INSERT INTO produkty_uzytkownika(id_produktu,id_uzytkownika, ilosc) " +
+            "VALUES (?,?,?);";
 
     //UPDATE
 

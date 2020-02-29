@@ -92,4 +92,19 @@ public class DatabaseProvider{
         }
         return null;
     }
+
+    public boolean addProductToUserFridge(int product_id, int user_token, int ilosc){
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(DODAJ_PRODUKTY_UZYTKOWNIKA);
+            pstmt.setInt(1,product_id);
+            pstmt.setInt(2,user_token);
+            pstmt.setInt(3,ilosc);
+            pstmt.execute();
+
+            return true;
+        } catch(Exception e){
+
+        }
+        return false;
+    }
 }
