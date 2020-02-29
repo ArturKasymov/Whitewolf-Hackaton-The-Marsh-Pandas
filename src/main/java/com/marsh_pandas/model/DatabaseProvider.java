@@ -1,9 +1,9 @@
 package com.marsh_pandas.model;
 
 import java.net.URI;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
+import java.sql.*;
+
+import static com.marsh_pandas.model.PostgreSQLQueries.*;
 
 public class DatabaseProvider{
 
@@ -17,6 +17,17 @@ public class DatabaseProvider{
         connection = DriverManager.getConnection(dbUrl, username, password);
     }
 
+    private void checkDatabase() throws SQLException {
 
+        Statement stmt=connection.createStatement();
+        
+        stmt.execute(CHECK_UZYTKOWNICY);
+        stmt.execute(CHECK_PRODUKTY);
+        stmt.execute(CHECK_PRODUKTY_UZYTKOWNIKA);
+        stmt.execute(CHECK_PRZEPIS);
+        stmt.execute(CHECK_PRODUKTY_PRZEPIS);
+        stmt.execute(CHECK_SKLEP);
+        stmt.execute(CHECK_PRODUKTY_SKLEPU);
+    }
 
 }
