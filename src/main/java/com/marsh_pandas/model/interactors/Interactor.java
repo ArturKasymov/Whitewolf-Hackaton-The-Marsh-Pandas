@@ -1,6 +1,7 @@
 package com.marsh_pandas.model.interactors;
 
 import com.marsh_pandas.model.data_provider.DatabaseProvider;
+import com.marsh_pandas.model.repositories.CryptoRepo;
 
 public class Interactor implements LoginInteractor {
 
@@ -19,6 +20,8 @@ public class Interactor implements LoginInteractor {
     }
 
     public boolean checkUserLoginData(String email, String password) {
-        return false;
+        String userHashedPassword = provider.getUserPassword(email);
+        return CryptoRepo.comparePasswords(userHashedPassword, CryptoRepo.encryptPassword(password));
     }
+    
 }

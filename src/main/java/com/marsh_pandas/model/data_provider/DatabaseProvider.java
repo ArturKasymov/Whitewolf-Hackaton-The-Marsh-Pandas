@@ -32,6 +32,18 @@ public class DatabaseProvider{
         stmt.execute(CHECK_PRODUKTY_SKLEPU);
     }
 
-
+    public String getUserPassword(String email) {
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(GET_HASLO);
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            if(rs.isClosed()) return null;
+            return rs.getString(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }
