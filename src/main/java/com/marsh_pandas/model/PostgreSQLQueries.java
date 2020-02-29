@@ -9,12 +9,12 @@ public class PostgreSQLQueries {
             ");";
     public static final String CHECK_PRODUKTY = "CREATE TABLE IF NOT EXISTS produkty (\n" +
             "id_produktu serial primary key,\n" +
-            "nazwa varchar(64) not null unique\n" +
+            "nazwa varchar(64) not null unique,\n" +
             "jednostka INTEGER not null\n" +
             ");";
     public static final String CHECK_PRODUKTY_UZYTKOWNIKA = "CREATE TABLE IF NOT EXISTS produkty_uzytkownika(\n" +
             "id_produktu INTEGER REFERENCES produkty,\n" +
-            "id_uzytkownika INTEGER REFERENCES uzytkownicy\n" +
+            "id_uzytkownika INTEGER REFERENCES uzytkownicy,\n" +
             "ilosc INTEGER not null\n" +
             ");";
     public static final String CHECK_PRZEPIS = "CREATE TABLE IF NOT EXISTS przepisy (\n" +
@@ -79,9 +79,17 @@ public class PostgreSQLQueries {
     public static final String GET_TOTAL_IMPRESSIONS = "SELECT sum(impressions) from ad_unit_stats;";
 
     //INSERT
-    public static final String INSERT_USER = "INSERT INTO users(user_name, permission_group, password_hash) " +
-            "VALUES (?,?,?) RETURNING user_id;";
-    public static final String INSERT_PROJECT = "INSERT INTO projects(name) VALUES(?) RETURNING id;";
+    public static final String DODAJ_UZYTKOWNIKA = "INSERT INTO uzytkownicy(email, haslo) " +
+            "VALUES (?,?) RETURNING id_uzytkownika;";
+    public static final String DODAJ_PRODUKT = "INSERT INTO produkty(nazwa,jednostka) VALUES(?,?) RETURNING id_produktu;";
+
+    public static final String DODAJ_PRZEPIS = "INSERT INTO przepisy(nazwa) VALUES(?) RETURNING id_przepisu;";
+
+    public static final String DODAJ_SKLEP = "INSERT INTO sklepy(nazwa) VALUES(?) RETURNING id_sklepu;";
+
+
+
+
     public static final String INSERT_PLATFORM = "INSERT INTO platforms(name) VALUES(?) RETURNING id;";
     public static final String INSERT_APPLICATION = "INSERT INTO applications(name, platform_id, project_id) " +
             "VALUES (?,?,?) RETURNING id;";
