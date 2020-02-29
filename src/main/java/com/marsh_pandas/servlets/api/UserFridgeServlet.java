@@ -37,20 +37,20 @@ public class UserFridgeServlet extends HttpServlet {
         String user_token = req.getParameter("user_token");
 
         List<Product> list_products=interactor.getUserFridgeProducts(user_token);
-
         JSONObject responseJSON = new JSONObject();
-
         JSONArray list_productsJSON = new JSONArray();
-        for(Product product: list_products){
-            list_productsJSON.put(product.getJSON());
+        if(list_products!=null) {
+            for (Product product : list_products) {
+                list_productsJSON.put(product.getJSON());
+            }
         }
-        responseJSON.put("products_list",list_productsJSON);
-
-        //if (interactor.checkUserLoginData(email, password)) {
+        responseJSON.put("products_list", list_productsJSON);
         resp.getWriter().println(responseJSON.toString());
+
+
         /*}else
         {*/
-            resp.getWriter().println("Permission denied");
+         //   resp.getWriter().println("Permission denied");
         //}
     }
 
