@@ -28,6 +28,9 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
         if (userHashedPassword== null) {
             //TODO need registration
         }
+
+        System.out.println(userHashedPassword + " "+ password);
+
         return CryptoRepo.comparePasswords(userHashedPassword, CryptoRepo.encryptPassword(password));
     }
 
