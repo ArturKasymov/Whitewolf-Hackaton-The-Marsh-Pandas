@@ -1,6 +1,7 @@
 package com.marsh_pandas.model.data_provider;
 
 import com.marsh_pandas.model.entities.Product;
+import com.marsh_pandas.model.entities.ReceiptProduct;
 
 import java.math.BigDecimal;
 import java.net.URI;
@@ -82,9 +83,7 @@ public class DatabaseProvider implements UtilScriptDataProvider{
             ResultSet rs = pstmt.executeQuery();
             List<Product> list_products = new ArrayList<>();
             while(rs.next()){
-                int id=rs.getInt(0);
-                String nazwa = rs.getString(1);
-                list_products.add(new Product(id,nazwa));
+                list_products.add(new Product(rs.getInt(0),rs.getString(1), rs.getBigDecimal(2),rs.getBigDecimal(3), rs.getBigDecimal(4), rs.getBigDecimal(5)));
             }
             return list_products;
         } catch(Exception e){
@@ -114,9 +113,7 @@ public class DatabaseProvider implements UtilScriptDataProvider{
             ResultSet rs = pstmt.executeQuery();
             List<Product> list_products = new ArrayList<Product>();
             while(rs.next()){
-                int id=rs.getInt(0);
-                String nazwa = rs.getString(1);
-                list_products.add(new Product(id,nazwa));
+                list_products.add(new Product(rs.getInt(0),rs.getString(1), rs.getBigDecimal(2),rs.getBigDecimal(3), rs.getBigDecimal(4), rs.getBigDecimal(5)));
             }
             return list_products;
         } catch(Exception e){
@@ -139,4 +136,11 @@ public class DatabaseProvider implements UtilScriptDataProvider{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void insertAdminReceipt(String receiptName, String description, List<ReceiptProduct> list_products) {
+
+    }
+
+
 }

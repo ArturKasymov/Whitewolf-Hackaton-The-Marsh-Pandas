@@ -12,9 +12,13 @@ public class Product {
     private BigDecimal fats;
     private BigDecimal carbohydrates;
 
-    public Product(int id, String nazwa) {
+    public Product(int id, String nazwa, BigDecimal kcal, BigDecimal protein, BigDecimal fats, BigDecimal carbohydrates) {
         this.id=id;
         this.nazwa=nazwa;
+        this.kcal=kcal;
+        this.protein=protein;
+        this.fats=fats;
+        this.carbohydrates=carbohydrates;
     }
 
     public int getId(){
