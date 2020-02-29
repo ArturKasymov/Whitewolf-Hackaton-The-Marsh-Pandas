@@ -22,4 +22,15 @@ public class ReceiptProduct {
         this.id=id;
     }
 
+    public String getName(){
+        return this.name;
+    }
+
+    public int getID(){
+        return this.id;
+    }
+
+    public BigDecimal getQuantity(){
+        return this.quantity;
+    }
 }

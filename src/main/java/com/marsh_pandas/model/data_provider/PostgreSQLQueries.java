@@ -104,12 +104,16 @@ public class PostgreSQLQueries {
 
     public static final String DODAJ_PRODUKT = "INSERT INTO produkty(nazwa, kcal, protein, fats, carbohydrates) VALUES(?,?,?,?,?) RETURNING id_produktu;";
 
-    public static final String DODAJ_PRZEPIS = "INSERT INTO przepisy(nazwa) VALUES(?) RETURNING id_przepisu;";
+    public static final String DODAJ_PRZEPIS = "INSERT INTO przepisy(id_uzytkownika, nazwa, opis) VALUES(?,?,?) RETURNING id_przepisu;";
+
+    public static final String DODAJ_PRODUCT_PRZEPISU = "INSERT INTO produkty_przepis(id_przepisu, id_produktu, ilosc) VALUES(?,?,?);";
 
     public static final String DODAJ_SKLEP = "INSERT INTO sklepy(nazwa) VALUES(?) RETURNING id_sklepu;";
 
     public static final String DODAJ_PRODUKTY_UZYTKOWNIKA = "INSERT INTO produkty_uzytkownika(id_produktu,id_uzytkownika, ilosc) " +
             "VALUES (?,?,?);";
+
+
 
     //UPDATE
 
