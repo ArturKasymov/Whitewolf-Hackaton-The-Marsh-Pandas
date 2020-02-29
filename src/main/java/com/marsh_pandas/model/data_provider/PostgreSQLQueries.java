@@ -39,6 +39,8 @@ public class PostgreSQLQueries {
 
     //GET
     public static final String GET_HASLO = "SELECT haslo FROM uzytkownicy u WHERE u.email=?;";
+    public static final String GET_USER_ID = "SELECT id_uzytkownika FROM uzytkownicy u WHERE u.email=?;";
+
     public static final String GET_UZYTKOWNIK = "SELECT u.* FROM uzytkownicy u WHERE u.id_uzytkownika=?;";
     public static final String GET_WSZYSCY_UZYTKOWNICY = "SELECT u.* FROM uzytkownicy u;";
 
