@@ -49,8 +49,9 @@ public class PostgreSQLQueries {
     public static final String GET_WSZYSCY_UZYTKOWNICY = "SELECT u.id_uzytkownika, u.email, u.haslo FROM uzytkownicy u;";
 
 
-    public static final String GET_PRODUKT = "SELECT p.id_produktu, p.nazwa, p.jednostka  FROM produkty p WHERE p.id_produktu=?;";
-    public static final String GET_WSZYSTKIE_PRODUKTY = "SELECT p.id_produktu, p.nazwa, p.jednostka  FROM produkty p;";
+    public static final String GET_PRODUKT = "SELECT p.id_produktu, p.nazwa, p.kcal, p.protein, p.fats, p.carbohydrates FROM produkty p WHERE p.id_produktu=?;";
+
+    public static final String GET_WSZYSTKIE_PRODUKTY = "SELECT p.id_produktu, p.nazwa  FROM produkty p;";
     public static final String GET_PRODUKTY_UZYTKOWNIKA =
             "SELECT p.id_produktu, p.nazwa, p.jednostka FROM produkty p " +
             "JOIN produkty_uzytkownika pu ON p.id_produktu = pu.id_produktu " +
@@ -92,7 +93,8 @@ public class PostgreSQLQueries {
     //INSERT
     public static final String DODAJ_UZYTKOWNIKA = "INSERT INTO uzytkownicy(email, haslo) " +
             "VALUES (?,?) RETURNING id_uzytkownika;";
-    public static final String DODAJ_PRODUKT = "INSERT INTO produkty(nazwa,jednostka) VALUES(?,?) RETURNING id_produktu;";
+
+    public static final String DODAJ_PRODUKT = "INSERT INTO produkty(nazwa, kcal, protein, fats, carbohydrates) VALUES(?,?,?,?,?) RETURNING id_produktu;";
 
     public static final String DODAJ_PRZEPIS = "INSERT INTO przepisy(nazwa) VALUES(?) RETURNING id_przepisu;";
 
