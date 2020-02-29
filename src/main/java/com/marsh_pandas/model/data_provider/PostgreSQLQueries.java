@@ -10,7 +10,10 @@ public class PostgreSQLQueries {
     public static final String CHECK_PRODUKTY = "CREATE TABLE IF NOT EXISTS produkty (\n" +
             "id_produktu serial primary key,\n" +
             "nazwa varchar(64) not null unique,\n" +
-            "jednostka varchar(64) not null\n" +
+            "kcal numeric(6,2) not null,\n" +
+            "protein numeric(6,2) not null,\n" +
+            "fats numeric(6,2) not null,\n" +
+            "carbohydrates numeric(6,2) not null\n" +
             ");";
     public static final String CHECK_PRODUKTY_UZYTKOWNIKA = "CREATE TABLE IF NOT EXISTS produkty_uzytkownika(\n" +
             "id_produktu INTEGER REFERENCES produkty,\n" +

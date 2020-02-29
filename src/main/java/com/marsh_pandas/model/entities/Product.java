@@ -1,14 +1,21 @@
 package com.marsh_pandas.model.entities;
 
+import netscape.javascript.JSObject;
+import org.json.JSONObject;
+
+import java.math.BigDecimal;
+
 public class Product {
     private int id;
     private String nazwa;
-    private String jednostka;
+    private BigDecimal kcal;
+    private BigDecimal protein;
+    private BigDecimal fats;
+    private BigDecimal carbohydrates;
 
-    public Product(int id, String nazwa, String jednostka) {
+    public Product(int id, String nazwa) {
         this.id=id;
         this.nazwa=nazwa;
-        this.jednostka=jednostka;
     }
 
     public int getId(){
@@ -19,15 +26,14 @@ public class Product {
         return nazwa;
     }
 
-    public String getJednostka(){
-        return jednostka;
-    }
-
     public String getJSON(){
-        return "{" +
-                "id:" + this.id +","+
-                "nazwa:" + this.nazwa +","+
-                "jednostka:" + this.jednostka +
-                "}";
+        JSONObject json = new JSONObject();
+        json.put("id", id);
+        json.put("name", nazwa);
+        json.put("kcal", kcal);
+        json.put("protein", protein);
+        json.put("fats", fats);
+        json.put("carbohydrates", carbohydrates);
+        return json.toString();
     }
 }
