@@ -17,7 +17,7 @@ public class utils {
                                         new BigDecimal("1.1"),
                                         new BigDecimal("0.3"),
                                         new BigDecimal("22.8"));
-            
+
 
         } catch (Exception e) {
             e.printStackTrace();
