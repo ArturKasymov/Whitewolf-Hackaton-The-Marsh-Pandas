@@ -5,6 +5,7 @@ import com.marsh_pandas.model.entities.Product;
 import com.marsh_pandas.model.data_provider.DatabaseProvider;
 import com.marsh_pandas.model.entities.Recipe;
 import com.marsh_pandas.model.repositories.CryptoRepo;
+import com.marsh_pandas.utils;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,6 +30,9 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
 
     private Interactor() throws Exception {
         this.provider = new DatabaseProvider();
+
+        utils.insertProducts();
+
     }
 
     @Override
