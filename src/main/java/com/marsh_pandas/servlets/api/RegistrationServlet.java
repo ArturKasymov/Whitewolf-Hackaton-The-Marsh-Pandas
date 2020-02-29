@@ -13,7 +13,7 @@ import java.io.IOException;
 
 
 @WebServlet(
-        name = "API_LOGIN",
+        name = "API_REGISTRATION",
         urlPatterns = "/api/registration"
 )
 public class RegistrationServlet extends HttpServlet {
