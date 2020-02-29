@@ -2,13 +2,14 @@ package com.marsh_pandas.model.data_provider;
 
 import com.marsh_pandas.model.entities.Product;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.sql.*;
 import java.util.*;
 
 import static com.marsh_pandas.model.data_provider.PostgreSQLQueries.*;
 
-public class DatabaseProvider{
+public class DatabaseProvider implements UtilScriptDataProvider{
 
     private Connection connection;
 
@@ -79,16 +80,15 @@ public class DatabaseProvider{
             PreparedStatement pstmt = connection.prepareStatement(GET_PRODUKTY_UZYTKOWNIKA);
             pstmt.setString(1,user_token);
             ResultSet rs = pstmt.executeQuery();
-            List<Product> list_products = new ArrayList<Product>();
+            List<Product> list_products = new ArrayList<>();
             while(rs.next()){
                 int id=rs.getInt(0);
                 String nazwa = rs.getString(1);
-                String jednostka = rs.getString(2);
-                list_products.add(new Product(id,nazwa,jednostka));
+                list_products.add(new Product(id,nazwa));
             }
             return list_products;
         } catch(Exception e){
-
+            e.printStackTrace();
         }
         return null;
     }
@@ -103,11 +103,10 @@ public class DatabaseProvider{
 
             return true;
         } catch(Exception e){
-
+            e.printStackTrace();
         }
         return false;
     }
-
 
     public List<Product> getAllProducts(){
         try {
@@ -117,13 +116,27 @@ public class DatabaseProvider{
             while(rs.next()){
                 int id=rs.getInt(0);
                 String nazwa = rs.getString(1);
-                String jednostka = rs.getString(2);
-                list_products.add(new Product(id,nazwa,jednostka));
+                list_products.add(new Product(id,nazwa));
             }
             return list_products;
         } catch(Exception e){
-
+            e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void insertProduct(String productName, BigDecimal kcal, BigDecimal protein, BigDecimal fats, BigDecimal carbohydrates) {
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(DODAJ_PRODUKT);
+            pstmt.setString(1, productName);
+            pstmt.setBigDecimal(2, kcal);
+            pstmt.setBigDecimal(3, protein);
+            pstmt.setBigDecimal(4, fats);
+            pstmt.setBigDecimal(5, carbohydrates);
+            pstmt.execute();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }
