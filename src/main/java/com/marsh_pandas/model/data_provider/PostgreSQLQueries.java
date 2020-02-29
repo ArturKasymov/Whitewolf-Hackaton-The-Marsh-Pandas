@@ -24,7 +24,8 @@ public class PostgreSQLQueries {
     public static final String CHECK_PRODUKTY_PRZEPIS = "CREATE TABLE IF NOT EXISTS produkty_przepis (\n" +
             "id_przepisu INTEGER REFERENCES przepisy,\n" +
             "id_produktu INTEGER REFERENCES produkty,\n" +
-            "ilosc INTEGER not null\n" +
+            "ilosc INTEGER not null,\n" +
+            "opis varchar(4096) not null\n" +
             ");";
     public static final String CHECK_SKLEP = "CREATE TABLE IF NOT EXISTS sklepy (\n" +
             "id_sklepu serial primary key,\n" +
