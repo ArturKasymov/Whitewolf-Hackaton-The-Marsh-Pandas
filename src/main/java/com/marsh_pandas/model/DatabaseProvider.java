@@ -15,12 +15,14 @@ public class DatabaseProvider{
         String password = dbUri.getUserInfo().split(":")[1];
         String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
         connection = DriverManager.getConnection(dbUrl, username, password);
+
+        checkDatabase();
     }
 
     private void checkDatabase() throws SQLException {
 
         Statement stmt=connection.createStatement();
-        
+
         stmt.execute(CHECK_UZYTKOWNICY);
         stmt.execute(CHECK_PRODUKTY);
         stmt.execute(CHECK_PRODUKTY_UZYTKOWNIKA);
