@@ -65,6 +65,21 @@ public class utils {
                                         new BigDecimal("8.6"),
                                         new BigDecimal("11.2"),
                                         new BigDecimal("2.1"));
+            dataProvider.insertProduct("Yogurt",
+                                        new BigDecimal("41.8"),
+                                        new BigDecimal("2.6"),
+                                        new BigDecimal("1.4"),
+                                        new BigDecimal("0.7"));
+            dataProvider.insertProduct("Rice",
+                                        new BigDecimal("70.4"),
+                                        new BigDecimal("5.6"),
+                                        new BigDecimal("1.0"),
+                                        new BigDecimal("11.7"));
+            dataProvider.insertProduct("Potatoes",
+                                        new BigDecimal("75.4"),
+                                        new BigDecimal("5.6"),
+                                        new BigDecimal("1.0"),
+                                        new BigDecimal("11.7"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,17 +92,41 @@ public class utils {
 
         try {
             UtilScriptDataProvider dataProvider = new DatabaseProvider();
-
+            
             List<UtilEntityProduct> lp1 = new ArrayList<>();
             UtilEntityProduct p1 = new UtilEntityProduct("Banana", new BigDecimal("100"));
+            UtilEntityProduct p2 = new UtilEntityProduct("Yogurt", new BigDecimal("250"));
+            UtilEntityProduct p3 = new UtilEntityProduct("Cornflakes", new BigDecimal("150"));
+            
             lp1.add(p1);
+            lp1.add(p2);
+            lp1.add(p3);
 
-            dataProvider.insertAdminReceipt("Banana slices", "slice the banana", lp1);
+            List<UtilEntityProduct> lp2 = new ArrayList<>();
+            UtilEntityProduct p4 = new UtilEntityProduct("Fish", new BigDecimal("150"));
+            UtilEntityProduct p5 = new UtilEntityProduct("Tomatoes", new BigDecimal("100"));
+            UtilEntityProduct p6 = new UtilEntityProduct("Rice", new BigDecimal("150"));
+
+            lp2.add(p4);
+            lp2.add(p5);
+            lp2.add(p6);
+
+            List<UtilEntityProduct> lp3 = new ArrayList<>();
+            UtilEntityProduct p7 = new UtilEntityProduct("Chicken wings", new BigDecimal("200"));
+            UtilEntityProduct p8 = new UtilEntityProduct("Cucumbers", new BigDecimal("150"));
+            UtilEntityProduct p9 = new UtilEntityProduct("Tomatoes", new BigDecimal("150"));
+
+            lp2.add(p7);
+            lp2.add(p8);
+            lp2.add(p9);
+
+            dataProvider.insertAdminReceipt("Yummy Banana", "slice the banana, open yogurt and mix with banana and add cornflakes to create the best meal!", lp1);
+            dataProvider.insertAdminReceipt("Jewy fish", "Prepare fish by removing fishbones if necessary, slice tomatoes, boil rice and that's all! ", lp2);
+            dataProvider.insertAdminReceipt("Happy Meat", "Fry chicken wings, slice cucumbers, boil tomatoes, you could also add any spices if you wish!", lp3);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
     }
 
