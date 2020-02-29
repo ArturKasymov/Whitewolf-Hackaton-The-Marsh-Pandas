@@ -46,4 +46,14 @@ public class DatabaseProvider{
         return null;
     }
 
+    public int insertUser(String username, String encryptPassword) throws SQLException {
+        PreparedStatement pstmt = connection.prepareStatement(DODAJ_UZYTKOWNIKA);
+        pstmt.setString(1,username);
+        pstmt.setString(2,encryptPassword);
+        pstmt.execute();
+        ResultSet rs =  pstmt.getResultSet();
+        rs.next();
+        return rs.getInt(1);
+    }
+
 }

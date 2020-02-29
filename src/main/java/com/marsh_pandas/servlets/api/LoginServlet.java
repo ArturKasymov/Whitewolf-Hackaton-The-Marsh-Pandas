@@ -16,7 +16,7 @@ import java.util.Random;
         name = "API_LOGIN",
         urlPatterns = "/api/login"
 )
-public class UserLoginServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
 
     private LoginInteractor interactor;

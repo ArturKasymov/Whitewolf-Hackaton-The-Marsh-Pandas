@@ -1,9 +1,12 @@
 package com.marsh_pandas.model.interactors;
 
+
 import com.marsh_pandas.model.data_provider.DatabaseProvider;
 import com.marsh_pandas.model.repositories.CryptoRepo;
 
-public class Interactor implements LoginInteractor {
+import java.sql.SQLException;
+
+public class Interactor implements LoginInteractor, RegistrationInteractor {
 
     private static Interactor instance;
 
@@ -19,9 +22,22 @@ public class Interactor implements LoginInteractor {
         this.provider = new DatabaseProvider();
     }
 
+    @Override
     public boolean checkUserLoginData(String email, String password) {
         String userHashedPassword = provider.getUserPassword(email);
+        if (userHashedPassword== null) {
+            //TODO need registration
+        }
         return CryptoRepo.comparePasswords(userHashedPassword, CryptoRepo.encryptPassword(password));
     }
-    
+
+    @Override
+    public int registerUser(String email, String password) {
+        try {
+            return provider.insertUser(email, CryptoRepo.encryptPassword(password));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
 }
