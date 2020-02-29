@@ -22,6 +22,7 @@ public class PostgreSQLQueries {
             ");";
     public static final String CHECK_PRZEPIS = "CREATE TABLE IF NOT EXISTS przepisy (\n" +
             "id_przepisu serial primary key,\n" +
+            "id_uzytkownika INTEGER REFERENCES uzytkownicy,\n" +
             "nazwa varchar(64) not null,\n" +
             "opis varchar(4096) not null\n" +
             ");";
@@ -42,9 +43,7 @@ public class PostgreSQLQueries {
 
     //GET
     public static final String GET_HASLO = "SELECT haslo FROM uzytkownicy u WHERE u.email=?;";
-
-    public static final String GET_USER_ID = "SELECT id_uzytkownika FROM uzytkownicy u WHERE u.email=?;";
-
+    public static final String GET_USER_ID = "SELECT u.id_uzytkownika FROM uzytkownicy u WHERE u.email=?;";
     public static final String GET_UZYTKOWNIK = "SELECT u.id_uzytkownika, u.email, u.haslo FROM uzytkownicy u WHERE u.id_uzytkownika=?;";
     public static final String GET_WSZYSCY_UZYTKOWNICY = "SELECT u.id_uzytkownika, u.email, u.haslo FROM uzytkownicy u;";
 
@@ -52,6 +51,7 @@ public class PostgreSQLQueries {
     public static final String GET_PRODUKT = "SELECT p.id_produktu, p.nazwa, p.kcal, p.protein, p.fats, p.carbohydrates FROM produkty p WHERE p.id_produktu=?;";
 
     public static final String GET_WSZYSTKIE_PRODUKTY = "SELECT p.id_produktu, p.nazwa, p.kcal, p.protein, p.fats, p.carbohydrates  FROM produkty p;";
+
     public static final String GET_PRODUKTY_UZYTKOWNIKA =
             "SELECT p.id_produktu, p.nazwa, p.kcal, p.protein, p.fats, p.carbohydrates  FROM produkty p " +
             "JOIN produkty_uzytkownika pu ON p.id_produktu = pu.id_produktu " +
@@ -60,11 +60,17 @@ public class PostgreSQLQueries {
 
 
     public static final String GET_PRODUKTY_PRZEPISY = "" +
-            "SELECT p.id_produktu, p.nazwa, p.jednostka  FROM produkty p " +
+            "SELECT p.id_produktu, p.id_uzytkownika, p.nazwa, p.jednostka  FROM produkty p " +
             "JOIN produkty_przepisy pp ON p.id_produktu = pp.id_produktu " +
             "JOIN przepisy pr ON pr.id_przepisu = pp.id_przepisu " +
             "WHERE pr.id_przepisu=?;";
-    public static final String GET_WSZYSTKIE_PRZEPISY = "SELECT p.id_przepisu, p.nazwa, p.opis FROM przepisy p;";
+    public static final String GET_PRZEPIS = "SELECT p.id_przepisu, p.id_uzytkownika, p.nazwa, p.opis FROM przepisy p WHERE p.id_przepisu=?;";
+    public static final String GET_PRZEPISY_PO_AUTORZE = "SELECT p.id_przepisu, p.id_uzytkownika, p.nazwa, p.opis FROM przepisy p WHERE p.id_uzytkownika=?;";
+    public static final String GET_PRODUKTY_PRZEPISU = "SELECT p.id_produktu, p.nazwa, p.kcal, p.protein, p.fats, p.carbohydrates  FROM produkty p" +
+            "JOIN t_produkty_przepis pp ON pp.id_produktu=p.id_produktu" +
+            "JOIN t_przepis prz ON prz.id_przepisu=pp.id_przepisu" +
+            " WHERE prz.id_przepisu=?;";
+    public static final String GET_WSZYSTKIE_PRZEPISY = "SELECT p.id_przepisu, p.id_uzytkownika, p.nazwa, p.opis FROM przepisy p;";
     public static final String GET_PRODUKTY_SKLEPU =
             "SELECT p.id_produktu, p.nazwa, p.jednostka  FROM produkty p " +
             "JOIN produkty_sklepu ps ON p.id_produktu = ps.id_produktu " +
@@ -110,5 +116,12 @@ public class PostgreSQLQueries {
     //DELETE
     //public static final String USUN_PRODUKT = "DELETE FROM user_charts WHERE id=?;";
 
+    public static final String DROP_UZYTKOWNICY = "DROP TABLE IF EXISTS uzytkownicy;";
+    public static final String DROP_PRODUKTY = "DROP TABLE IF EXISTS produkty;";
+    public static final String DROP_PRODUKTY_UZYTKOWNIKA = "DROP TABLE IF EXISTS produkty_uzytkownika";
+    public static final String DROP_PRZEPIS = "DROP TABLE IF EXISTS przepisy";
+    public static final String DROP_PRODUKTY_PRZEPIS = "DROP TABLE IF EXISTS produkty_przepis";
+    public static final String DROP_SKLEP = "DROP TABLE IF EXISTS sklepy";
+    public static final String DROP_PRODUKTY_SKLEPU = "DROP TABLE IF EXISTS produkty_sklepu ;";
 
 }
