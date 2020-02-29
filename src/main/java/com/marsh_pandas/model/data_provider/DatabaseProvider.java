@@ -107,4 +107,23 @@ public class DatabaseProvider{
         }
         return false;
     }
+
+
+    public List<Product> getAllProducts(){
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(GET_WSZYSTKIE_PRODUKTY);
+            ResultSet rs = pstmt.executeQuery();
+            List<Product> list_products = new ArrayList<Product>();
+            while(rs.next()){
+                int id=rs.getInt(0);
+                String nazwa = rs.getString(1);
+                String jednostka = rs.getString(2);
+                list_products.add(new Product(id,nazwa,jednostka));
+            }
+            return list_products;
+        } catch(Exception e){
+
+        }
+        return null;
+    }
 }

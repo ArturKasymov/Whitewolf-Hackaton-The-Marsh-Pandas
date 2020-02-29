@@ -52,6 +52,12 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
         return list_product;
     }
 
+    public List<Product> getAllProducts() {
+
+        List<Product> list_product=provider.getAllProducts();
+        return list_product;
+    }
+
     public void addProductToUserFridge(int product_id,int user_token, int ilosc){
         provider.addProductToUserFridge(product_id, user_token, ilosc);
     }
