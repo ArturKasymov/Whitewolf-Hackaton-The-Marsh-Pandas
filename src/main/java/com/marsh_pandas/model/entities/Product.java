@@ -1,6 +1,5 @@
 package com.marsh_pandas.model.entities;
 
-import netscape.javascript.JSObject;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
