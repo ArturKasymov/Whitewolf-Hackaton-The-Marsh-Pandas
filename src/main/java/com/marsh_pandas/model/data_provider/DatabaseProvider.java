@@ -228,7 +228,7 @@ public class DatabaseProvider implements UtilScriptDataProvider{
             }
             for(ReceiptProduct rp : list_products) rp.setID(name_to_id.get(rp.getName()));
             for(ReceiptProduct rp : list_products) insertReceiptProduct(receipt_id, rp.getID(), rp.getQuantity());
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
