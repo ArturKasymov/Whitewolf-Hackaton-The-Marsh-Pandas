@@ -79,9 +79,17 @@ public class PostgreSQLQueries {
     public static final String GET_TOTAL_IMPRESSIONS = "SELECT sum(impressions) from ad_unit_stats;";
 
     //INSERT
-    public static final String INSERT_USER = "INSERT INTO users(user_name, permission_group, password_hash) " +
-            "VALUES (?,?,?) RETURNING user_id;";
-    public static final String INSERT_PROJECT = "INSERT INTO projects(name) VALUES(?) RETURNING id;";
+    public static final String DODAJ_UZYTKOWNIKA = "INSERT INTO uzytkownicy(email, haslo) " +
+            "VALUES (?,?) RETURNING id_uzytkownika;";
+    public static final String DODAJ_PRODUKT = "INSERT INTO produkty(nazwa,jednostka) VALUES(?,?) RETURNING id_produktu;";
+
+    public static final String DODAJ_PRZEPIS = "INSERT INTO przepisy(nazwa) VALUES(?) RETURNING id_przepisu;";
+
+    public static final String DODAJ_SKLEP = "INSERT INTO sklepy(nazwa) VALUES(?) RETURNING id_sklepu;";
+
+
+
+
     public static final String INSERT_PLATFORM = "INSERT INTO platforms(name) VALUES(?) RETURNING id;";
     public static final String INSERT_APPLICATION = "INSERT INTO applications(name, platform_id, project_id) " +
             "VALUES (?,?,?) RETURNING id;";
