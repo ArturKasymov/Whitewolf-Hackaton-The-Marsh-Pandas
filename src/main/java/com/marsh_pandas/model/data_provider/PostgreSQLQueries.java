@@ -18,7 +18,7 @@ public class PostgreSQLQueries {
     public static final String CHECK_PRODUKTY_UZYTKOWNIKA = "CREATE TABLE IF NOT EXISTS produkty_uzytkownika(\n" +
             "id_produktu INTEGER REFERENCES produkty,\n" +
             "id_uzytkownika INTEGER REFERENCES uzytkownicy,\n" +
-            "ilosc INTEGER not null\n" +
+            "ilosc numeric(6,2) not null\n" +
             ");";
     public static final String CHECK_PRZEPIS = "CREATE TABLE IF NOT EXISTS przepisy (\n" +
             "id_przepisu serial primary key,\n" +
@@ -29,7 +29,7 @@ public class PostgreSQLQueries {
     public static final String CHECK_PRODUKTY_PRZEPIS = "CREATE TABLE IF NOT EXISTS produkty_przepis (\n" +
             "id_przepisu INTEGER REFERENCES przepisy,\n" +
             "id_produktu INTEGER REFERENCES produkty,\n" +
-            "ilosc INTEGER not null\n" +
+            "ilosc numeric(6,2) not null\n" +
             ");";
     public static final String CHECK_SKLEP = "CREATE TABLE IF NOT EXISTS sklepy (\n" +
             "id_sklepu serial primary key,\n" +
@@ -38,7 +38,7 @@ public class PostgreSQLQueries {
     public static final String CHECK_PRODUKTY_SKLEPU = "CREATE TABLE IF NOT EXISTS produkty_sklepu (\n" +
             "id_sklepu INTEGER REFERENCES sklepy,\n" +
             "id_produktu INTEGER REFERENCES produkty,\n" +
-            "ilosc INTEGER not null\n" +
+            "ilosc numeric(6,2) not null\n" +
             ");";
 
     //GET
@@ -76,6 +76,7 @@ public class PostgreSQLQueries {
             "JOIN produkty_sklepu ps ON p.id_produktu = ps.id_produktu " +
             "JOIN sklepy s ON s.id_sklepu = ps.id_przepisu " +
             "WHERE s.id_sklepu=?;";
+
     public static final String GET_WSZYSTKIE_SKLEPY = "SELECT s.id_sklepu, s.nazwa FROM sklepy s;";
 
 

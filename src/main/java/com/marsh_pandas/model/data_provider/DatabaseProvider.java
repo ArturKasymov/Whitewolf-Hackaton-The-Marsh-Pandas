@@ -77,6 +77,22 @@ public class DatabaseProvider implements UtilScriptDataProvider{
         return -1;
     }
 
+    public List<Product> getProductsShop(int id_shop){
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(GET_PRODUKTY_SKLEPU);
+            pstmt.setInt(1,id_shop);
+            ResultSet rs = pstmt.executeQuery();
+            List<Product> list_products = new ArrayList<>();
+            while(rs.next()){
+                list_products.add(new Product(rs.getInt(1),rs.getString(2), rs.getBigDecimal(3),rs.getBigDecimal(4), rs.getBigDecimal(5), rs.getBigDecimal(6)));
+            }
+            return list_products;
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public List<Product> getUserFridgeProducts(String user_token){
         try {
             PreparedStatement pstmt = connection.prepareStatement(GET_PRODUKTY_UZYTKOWNIKA);
