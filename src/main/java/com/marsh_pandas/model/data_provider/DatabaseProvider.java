@@ -1,6 +1,7 @@
 package com.marsh_pandas.model.data_provider;
 
 import com.marsh_pandas.model.entities.Product;
+import com.marsh_pandas.model.entities.Recipe;
 
 import java.net.URI;
 import java.sql.*;
@@ -122,8 +123,83 @@ public class DatabaseProvider{
             }
             return list_products;
         } catch(Exception e){
-
+            e.printStackTrace();
         }
         return null;
+    }
+
+
+    public Recipe getRecipe(int id_recipe){
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(GET_PRZEPIS);
+            pstmt.setInt(1,id_recipe);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            if (rs.isClosed()) return null;
+            return new Recipe(rs.getInt(0),rs.getString(1),rs.getString(2));
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Recipe> getRecipesByAuthor(int id_author){
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(GET_PRZEPISY_PO_AUTORZE);
+            pstmt.setInt(1,id_author);
+            ResultSet rs = pstmt.executeQuery();
+            List<Recipe> list_recipes = new ArrayList<Recipe>();
+            while(rs.next()){
+                int id=rs.getInt(0);
+                String nazwa = rs.getString(1);
+                String opis = rs.getString(2);
+                list_recipes.add(new Recipe(id,nazwa,opis));
+            }
+            return list_recipes;
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public List<Product> getProductsRecipe(int id_recipe){
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(GET_PRODUKTY_PRZEPISU);
+            pstmt.setInt(1,id_recipe);
+            ResultSet rs = pstmt.executeQuery();
+            List<Product> list_products = new ArrayList<Product>();
+            while(rs.next()){
+                int id=rs.getInt(0);
+                String nazwa = rs.getString(1);
+                String jednostka = rs.getString(2);
+                list_products.add(new Product(id,nazwa,jednostka));
+            }
+            return list_products;
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void dropAllTables(){
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(DROP_UZYTKOWNICY);
+            pstmt.execute();
+            PreparedStatement pstmt2 = connection.prepareStatement(DROP_PRODUKTY);
+            pstmt2.execute();
+            PreparedStatement pstmt3 = connection.prepareStatement(DROP_PRODUKTY_UZYTKOWNIKA);
+            pstmt3.execute();
+            PreparedStatement pstmt4 = connection.prepareStatement(DROP_PRZEPIS);
+            pstmt4.execute();
+            PreparedStatement pstmt5 = connection.prepareStatement(DROP_PRODUKTY_PRZEPIS);
+            pstmt5.execute();
+            PreparedStatement pstmt6 = connection.prepareStatement(DROP_SKLEP);
+            pstmt6.execute();
+            PreparedStatement pstmt7 = connection.prepareStatement(DROP_PRODUKTY_SKLEPU);
+            pstmt7.execute();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

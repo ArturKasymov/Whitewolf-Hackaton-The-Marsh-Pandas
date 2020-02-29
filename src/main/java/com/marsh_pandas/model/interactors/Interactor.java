@@ -3,9 +3,16 @@ package com.marsh_pandas.model.interactors;
 
 import com.marsh_pandas.model.entities.Product;
 import com.marsh_pandas.model.data_provider.DatabaseProvider;
+import com.marsh_pandas.model.entities.Recipe;
 import com.marsh_pandas.model.repositories.CryptoRepo;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.marsh_pandas.model.data_provider.PostgreSQLQueries.GET_PRODUKTY_PRZEPISU;
+import static com.marsh_pandas.model.data_provider.PostgreSQLQueries.GET_PRZEPIS;
 
 
 public class Interactor implements LoginInteractor, RegistrationInteractor {
@@ -60,5 +67,46 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
 
     public void addProductToUserFridge(int product_id,int user_token, int ilosc){
         provider.addProductToUserFridge(product_id, user_token, ilosc);
+    }
+
+
+
+    public Recipe getRecipe(int id_recipe){
+        try {
+            Recipe recipe=provider.getRecipe(id_recipe);
+            return recipe;
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Recipe> getRecipesByAuthor(int id_author){
+        try {
+            List<Recipe> list_recipe=provider.getRecipesByAuthor(id_author);
+            return list_recipe;
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Product> getProductsRecipe(int id_recipe){
+        try {
+            List<Product> list_products=provider.getProductsRecipe(id_recipe);
+            return list_products;
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void dropAllTables(){
+        try {
+            provider.dropAllTables();
+
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }
