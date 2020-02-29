@@ -35,7 +35,7 @@ public class DatabaseProvider{
         stmt.execute(CHECK_PRODUKTY_SKLEPU);
     }
 
-<<<<<<< HEAD
+
     public String getUserPassword(String email) {
         try {
             PreparedStatement pstmt = connection.prepareStatement(GET_HASLO);
