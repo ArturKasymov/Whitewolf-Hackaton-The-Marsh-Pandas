@@ -1,9 +1,9 @@
-package com.marsh_pandas.model;
+package com.marsh_pandas.model.data_provider;
 
 import java.net.URI;
 import java.sql.*;
 
-import static com.marsh_pandas.model.PostgreSQLQueries.*;
+import static com.marsh_pandas.model.data_provider.PostgreSQLQueries.*;
 
 public class DatabaseProvider{
 
@@ -31,5 +31,7 @@ public class DatabaseProvider{
         stmt.execute(CHECK_SKLEP);
         stmt.execute(CHECK_PRODUKTY_SKLEPU);
     }
+
+
 
 }

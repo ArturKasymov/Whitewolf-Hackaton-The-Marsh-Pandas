@@ -1,4 +1,4 @@
-package com.marsh_pandas.model;
+package com.marsh_pandas.model.data_provider;
 
 public class PostgreSQLQueries {
 

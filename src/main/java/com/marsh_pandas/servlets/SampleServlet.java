@@ -1,7 +1,7 @@
 package com.marsh_pandas.servlets;
 
 
-import com.marsh_pandas.model.DatabaseProvider;
+import com.marsh_pandas.model.data_provider.DatabaseProvider;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
