@@ -51,12 +51,14 @@ public class PostgreSQLQueries {
 
     public static final String GET_PRODUKT = "SELECT p.id_produktu, p.nazwa, p.kcal, p.protein, p.fats, p.carbohydrates FROM produkty p WHERE p.id_produktu=?;";
 
-    public static final String GET_WSZYSTKIE_PRODUKTY = "SELECT p.id_produktu, p.nazwa  FROM produkty p;";
+    public static final String GET_WSZYSTKIE_PRODUKTY = "SELECT p.id_produktu, p.nazwa, p.kcal, p.protein, p.fats, p.carbohydrates  FROM produkty p;";
     public static final String GET_PRODUKTY_UZYTKOWNIKA =
-            "SELECT p.id_produktu, p.nazwa, p.jednostka FROM produkty p " +
+            "SELECT p.id_produktu, p.nazwa, p.kcal, p.protein, p.fats, p.carbohydrates  FROM produkty p " +
             "JOIN produkty_uzytkownika pu ON p.id_produktu = pu.id_produktu " +
             "JOIN uzytkownicy u ON u.id_uzytkownika = pu.id_uzytkownika " +
             "WHERE u.id_uzytkownika=?;";
+
+
     public static final String GET_PRODUKTY_PRZEPISY = "" +
             "SELECT p.id_produktu, p.nazwa, p.jednostka  FROM produkty p " +
             "JOIN produkty_przepisy pp ON p.id_produktu = pp.id_produktu " +

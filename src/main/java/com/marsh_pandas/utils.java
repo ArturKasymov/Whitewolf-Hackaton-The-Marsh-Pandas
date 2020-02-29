@@ -2,8 +2,11 @@ package com.marsh_pandas;
 
 import com.marsh_pandas.model.data_provider.DatabaseProvider;
 import com.marsh_pandas.model.data_provider.UtilScriptDataProvider;
+import com.marsh_pandas.model.entities.ReceiptProduct;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class utils {
 
@@ -62,6 +65,24 @@ public class utils {
                                         new BigDecimal("8.6"),
                                         new BigDecimal("11.2"),
                                         new BigDecimal("2.1"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public static void insertReceipts(){
+
+        try {
+            UtilScriptDataProvider dataProvider = new DatabaseProvider();
+
+            List<ReceiptProduct> lp1 = new ArrayList<>();
+            ReceiptProduct p1 = new ReceiptProduct("Banana", new BigDecimal("100"));
+            lp1.add(p1);
+
+            dataProvider.insertAdminReceipt("Banana slices", "slice the banana", lp1);
 
         } catch (Exception e) {
             e.printStackTrace();
