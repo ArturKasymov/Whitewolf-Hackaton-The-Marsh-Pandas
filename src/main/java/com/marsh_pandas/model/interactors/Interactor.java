@@ -101,6 +101,17 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
         return null;
     }
 
+
+    public List<Product> getProductsShop(int id_shop){
+        try {
+            List<Product> list_products=provider.getProductsShop(id_shop);
+            return list_products;
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void dropAllTables(){
         try {
             provider.dropAllTables();
