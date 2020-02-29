@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(
-        name = "API_LOGIN",
+        name = "API_PRODUCTS_LIST",
         urlPatterns = "/api/products_list"
 )
 

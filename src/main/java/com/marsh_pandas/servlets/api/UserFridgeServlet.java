@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(
-        name = "API_LOGIN",
+        name = "API_USER_FRIDGE",
         urlPatterns = "/api/user/fridge"
 )
 
