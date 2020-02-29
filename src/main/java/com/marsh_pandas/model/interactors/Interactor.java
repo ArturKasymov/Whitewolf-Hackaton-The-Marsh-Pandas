@@ -1,10 +1,7 @@
 package com.marsh_pandas.model.interactors;
 
-<<<<<<< HEAD
 
-=======
-import com.marsh_pandas.model.Entites.Product;
->>>>>>> dodana encja Produktu, proste wyciąganie ich z bazy
+import com.marsh_pandas.model.entities.Product;
 import com.marsh_pandas.model.data_provider.DatabaseProvider;
 import com.marsh_pandas.model.repositories.CryptoRepo;
 

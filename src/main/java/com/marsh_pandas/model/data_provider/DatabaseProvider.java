@@ -1,6 +1,6 @@
 package com.marsh_pandas.model.data_provider;
 
-import com.marsh_pandas.model.Entites.Product;
+import com.marsh_pandas.model.entities.Product;
 
 import java.net.URI;
 import java.sql.*;

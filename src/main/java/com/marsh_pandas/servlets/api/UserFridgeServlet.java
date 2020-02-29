@@ -1,8 +1,7 @@
 package com.marsh_pandas.servlets.api;
 
-import com.marsh_pandas.model.Entites.Product;
+import com.marsh_pandas.model.entities.Product;
 import com.marsh_pandas.model.interactors.Interactor;
-import com.marsh_pandas.model.interactors.LoginInteractor;
 import org.json.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,13 +62,15 @@ public class UserFridgeServlet extends HttpServlet {
             BufferedReader reader = req.getReader();
             while ((line = reader.readLine()) != null)
                 jb.append(line);
-        } catch (Exception e) { /*report an error*/ }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         try {
             JSONObject body =  HTTP.toJSONObject(jb.toString());
             int product_id=body.getInt("product_id");
             int ilosc=body.getInt("ilosc");
-            interactor.addProductToUserFridge(product_id,Integer.valueOf(user_token),ilosc);
+            interactor.addProductToUserFridge(product_id,Integer.parseInt(user_token),ilosc);
 
         } catch (JSONException e) {
             // crash and burn

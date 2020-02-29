@@ -1,4 +1,4 @@
-package com.marsh_pandas.model.Entites;
+package com.marsh_pandas.model.entities;
 
 public class Product {
     private int id;
