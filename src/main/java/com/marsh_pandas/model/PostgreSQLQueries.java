@@ -9,12 +9,12 @@ public class PostgreSQLQueries {
             ");";
     public static final String CHECK_PRODUKTY = "CREATE TABLE IF NOT EXISTS produkty (\n" +
             "id_produktu serial primary key,\n" +
-            "nazwa varchar(64) not null unique\n" +
+            "nazwa varchar(64) not null unique,\n" +
             "jednostka INTEGER not null\n" +
             ");";
     public static final String CHECK_PRODUKTY_UZYTKOWNIKA = "CREATE TABLE IF NOT EXISTS produkty_uzytkownika(\n" +
             "id_produktu INTEGER REFERENCES produkty,\n" +
-            "id_uzytkownika INTEGER REFERENCES uzytkownicy\n" +
+            "id_uzytkownika INTEGER REFERENCES uzytkownicy,\n" +
             "ilosc INTEGER not null\n" +
             ");";
     public static final String CHECK_PRZEPIS = "CREATE TABLE IF NOT EXISTS przepisy (\n" +
