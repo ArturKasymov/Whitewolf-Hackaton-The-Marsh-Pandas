@@ -4,16 +4,11 @@ package com.marsh_pandas.model.interactors;
 import com.marsh_pandas.model.entities.Product;
 import com.marsh_pandas.model.data_provider.DatabaseProvider;
 import com.marsh_pandas.model.entities.Recipe;
+import com.marsh_pandas.model.entities.UtilEntityProduct;
 import com.marsh_pandas.model.repositories.CryptoRepo;
-import com.marsh_pandas.utils;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.List;
-
-import static com.marsh_pandas.model.data_provider.PostgreSQLQueries.GET_PRODUKTY_PRZEPISU;
-import static com.marsh_pandas.model.data_provider.PostgreSQLQueries.GET_PRZEPIS;
 
 
 public class Interactor implements LoginInteractor, RegistrationInteractor {
@@ -57,9 +52,9 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
         return -1;
     }
 
-    public List<Product> getUserFridgeProducts(String user_token) {
+    public List<UtilEntityProduct> getUserFridgeProducts(String user_token) {
 
-        List<Product> list_product=provider.getUserFridgeProducts(user_token);
+        List<UtilEntityProduct> list_product=provider.getUserFridgeProducts(user_token);
         return list_product;
     }
 
@@ -69,7 +64,7 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
         return list_product;
     }
 
-    public void addProductToUserFridge(int product_id,int user_token, int ilosc){
+    public void addProductToUserFridge(int product_id,int user_token, BigDecimal ilosc){
         provider.addProductToUserFridge(product_id, user_token, ilosc);
     }
 
@@ -108,7 +103,7 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
 
     public List<Product> getProductsShop(int id_shop){
         try {
-            List<Product> list_products=provider.getProductsShop(id_shop);
+            List<Product> list_products=provider.getShopProducts(id_shop);
             return list_products;
         } catch(Exception e){
             e.printStackTrace();

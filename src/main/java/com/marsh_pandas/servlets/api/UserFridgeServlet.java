@@ -1,6 +1,7 @@
 package com.marsh_pandas.servlets.api;
 
 import com.marsh_pandas.model.entities.Product;
+import com.marsh_pandas.model.entities.UtilEntityProduct;
 import com.marsh_pandas.model.interactors.Interactor;
 import org.json.HTTP;
 import org.json.JSONArray;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 @WebServlet(
@@ -38,11 +40,11 @@ public class UserFridgeServlet extends HttpServlet {
 
         String user_token = req.getParameter("user_token");
 
-        List<Product> list_products=interactor.getUserFridgeProducts(user_token);
+        List<UtilEntityProduct> list_products=interactor.getUserFridgeProducts(user_token);
         JSONObject responseJSON = new JSONObject();
         JSONArray list_productsJSON = new JSONArray();
         if(list_products!=null) {
-            for (Product product : list_products) {
+            for (UtilEntityProduct product : list_products) {
                 list_productsJSON.put(product.getJSON());
             }
         }
@@ -68,15 +70,10 @@ public class UserFridgeServlet extends HttpServlet {
 
         try {
             JSONObject body =  HTTP.toJSONObject(jb.toString());
-            int product_id=body.getInt("product_id");
-            int ilosc=body.getInt("ilosc");
-            interactor.addProductToUserFridge(product_id,Integer.parseInt(user_token),ilosc);
-
+            interactor.addProductToUserFridge(body.getInt("product_id"),Integer.parseInt(user_token),body.getBigDecimal("quantity"));
         } catch (JSONException e) {
             // crash and burn
             throw new IOException("Error parsing JSON request string");
         }
-
-        super.doPost(req, resp);
     }
 }

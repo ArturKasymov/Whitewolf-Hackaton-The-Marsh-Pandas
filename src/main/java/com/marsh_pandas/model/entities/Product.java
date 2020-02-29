@@ -29,7 +29,7 @@ public class Product {
         return nazwa;
     }
 
-    public String getJSON(){
+    public JSONObject getJSON(){
         JSONObject json = new JSONObject();
         json.put("id", id);
         json.put("name", nazwa);
@@ -37,6 +37,6 @@ public class Product {
         json.put("protein", protein);
         json.put("fats", fats);
         json.put("carbohydrates", carbohydrates);
-        return json.toString();
+        return json;
     }
 }

@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(
-        name = "API_RECIPES",
+        name = "API_SHOPS",
         urlPatterns = "/api/shop"
 )
 

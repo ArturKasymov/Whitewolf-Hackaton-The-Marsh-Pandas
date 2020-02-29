@@ -2,7 +2,7 @@ package com.marsh_pandas;
 
 import com.marsh_pandas.model.data_provider.DatabaseProvider;
 import com.marsh_pandas.model.data_provider.UtilScriptDataProvider;
-import com.marsh_pandas.model.entities.ReceiptProduct;
+import com.marsh_pandas.model.entities.UtilEntityProduct;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -78,8 +78,8 @@ public class utils {
         try {
             UtilScriptDataProvider dataProvider = new DatabaseProvider();
 
-            List<ReceiptProduct> lp1 = new ArrayList<>();
-            ReceiptProduct p1 = new ReceiptProduct("Banana", new BigDecimal("100"));
+            List<UtilEntityProduct> lp1 = new ArrayList<>();
+            UtilEntityProduct p1 = new UtilEntityProduct("Banana", new BigDecimal("100"));
             lp1.add(p1);
 
             dataProvider.insertAdminReceipt("Banana slices", "slice the banana", lp1);

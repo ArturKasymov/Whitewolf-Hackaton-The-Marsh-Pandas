@@ -1,9 +1,10 @@
 package com.marsh_pandas.model.data_provider;
 
 import com.marsh_pandas.model.entities.Product;
-import com.marsh_pandas.model.entities.ReceiptProduct;
+import com.marsh_pandas.model.entities.UtilEntityProduct;
 import com.marsh_pandas.model.entities.Recipe;
 
+import javax.swing.text.html.parser.Entity;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.sql.*;
@@ -77,8 +78,8 @@ public class DatabaseProvider implements UtilScriptDataProvider{
         return -1;
     }
 
-    public List<Product> getProductsShop(int id_shop){
-        try {
+    public List<Product> getShopProducts(int id_shop){
+        try{
             PreparedStatement pstmt = connection.prepareStatement(GET_PRODUKTY_SKLEPU);
             pstmt.setInt(1,id_shop);
             ResultSet rs = pstmt.executeQuery();
@@ -93,14 +94,14 @@ public class DatabaseProvider implements UtilScriptDataProvider{
         return null;
     }
 
-    public List<Product> getUserFridgeProducts(String user_token){
+    public List<UtilEntityProduct> getUserFridgeProducts(String user_token){
         try {
             PreparedStatement pstmt = connection.prepareStatement(GET_PRODUKTY_UZYTKOWNIKA);
             pstmt.setString(1,user_token);
             ResultSet rs = pstmt.executeQuery();
-            List<Product> list_products = new ArrayList<>();
+            List<UtilEntityProduct> list_products = new ArrayList<>();
             while(rs.next()){
-                list_products.add(new Product(rs.getInt(1),rs.getString(2), rs.getBigDecimal(3),rs.getBigDecimal(4), rs.getBigDecimal(5), rs.getBigDecimal(6)));
+                list_products.add(new UtilEntityProduct(rs.getInt(1), rs.getString(2), rs.getBigDecimal(3)));
             }
             return list_products;
         } catch(Exception e){
@@ -109,12 +110,12 @@ public class DatabaseProvider implements UtilScriptDataProvider{
         return null;
     }
 
-    public boolean addProductToUserFridge(int product_id, int user_token, int ilosc){
+    public boolean addProductToUserFridge(int product_id, int user_token, BigDecimal ilosc){
         try {
             PreparedStatement pstmt = connection.prepareStatement(DODAJ_PRODUKTY_UZYTKOWNIKA);
             pstmt.setInt(1,product_id);
             pstmt.setInt(2,user_token);
-            pstmt.setInt(3,ilosc);
+            pstmt.setBigDecimal(3,ilosc);
             pstmt.execute();
 
             return true;
@@ -162,8 +163,8 @@ public class DatabaseProvider implements UtilScriptDataProvider{
             List<Recipe> list_recipes = new ArrayList<Recipe>();
             while(rs.next()){
                 int id=rs.getInt(1);
-                String nazwa = rs.getString(2);
-                String opis = rs.getString(3);
+                String nazwa = rs.getString(3);
+                String opis = rs.getString(4);
                 list_recipes.add(new Recipe(id,nazwa,opis));
             }
             return list_recipes;
@@ -228,7 +229,7 @@ public class DatabaseProvider implements UtilScriptDataProvider{
     }
 
     @Override
-    public void insertAdminReceipt(String receiptName, String description, List<ReceiptProduct> list_products) {
+    public void insertAdminReceipt(String receiptName, String description, List<UtilEntityProduct> list_products) {
         try {
 
             int receipt_id = insertReceipt(1, receiptName, description);
@@ -242,8 +243,8 @@ public class DatabaseProvider implements UtilScriptDataProvider{
             while (rsp.next()){
                 name_to_id.put(rsp.getString(2), rsp.getInt(1));
             }
-            for(ReceiptProduct rp : list_products) rp.setID(name_to_id.get(rp.getName()));
-            for(ReceiptProduct rp : list_products) insertReceiptProduct(receipt_id, rp.getID(), rp.getQuantity());
+            for(UtilEntityProduct rp : list_products) rp.setID(name_to_id.get(rp.getName()));
+            for(UtilEntityProduct rp : list_products) insertReceiptProduct(receipt_id, rp.getID(), rp.getQuantity());
 
         } catch (SQLException e) {
             e.printStackTrace();

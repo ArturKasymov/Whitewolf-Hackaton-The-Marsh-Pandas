@@ -37,8 +37,6 @@ public class ProductsListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //String user_token = req.getParameter("user_token");
-
         List<Product> list_products=interactor.getAllProducts();
         JSONObject responseJSON = new JSONObject();
         JSONArray list_productsJSON = new JSONArray();

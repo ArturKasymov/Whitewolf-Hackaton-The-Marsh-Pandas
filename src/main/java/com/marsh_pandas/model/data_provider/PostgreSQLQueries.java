@@ -2,12 +2,12 @@ package com.marsh_pandas.model.data_provider;
 
 public class PostgreSQLQueries {
 
-    public static final String CHECK_UZYTKOWNICY = "CREATE TABLE IF NOT EXISTS uzytkownicy (\n" +
+    static final String CHECK_UZYTKOWNICY = "CREATE TABLE IF NOT EXISTS uzytkownicy (\n" +
             "id_uzytkownika serial primary key,\n" +
             "email varchar(48) not null unique,\n" +
             "haslo varchar(256) not null\n" +
             ");";
-    public static final String CHECK_PRODUKTY = "CREATE TABLE IF NOT EXISTS produkty (\n" +
+    static final String CHECK_PRODUKTY = "CREATE TABLE IF NOT EXISTS produkty (\n" +
             "id_produktu serial primary key,\n" +
             "nazwa varchar(64) not null unique,\n" +
             "kcal numeric(6,2) not null,\n" +
@@ -15,45 +15,45 @@ public class PostgreSQLQueries {
             "fats numeric(6,2) not null,\n" +
             "carbohydrates numeric(6,2) not null\n" +
             ");";
-    public static final String CHECK_PRODUKTY_UZYTKOWNIKA = "CREATE TABLE IF NOT EXISTS produkty_uzytkownika(\n" +
+    static final String CHECK_PRODUKTY_UZYTKOWNIKA = "CREATE TABLE IF NOT EXISTS produkty_uzytkownika(\n" +
             "id_produktu INTEGER REFERENCES produkty,\n" +
             "id_uzytkownika INTEGER REFERENCES uzytkownicy,\n" +
             "ilosc numeric(6,2) not null\n" +
             ");";
-    public static final String CHECK_PRZEPIS = "CREATE TABLE IF NOT EXISTS przepisy (\n" +
+    static final String CHECK_PRZEPIS = "CREATE TABLE IF NOT EXISTS przepisy (\n" +
             "id_przepisu serial primary key,\n" +
             "id_uzytkownika INTEGER REFERENCES uzytkownicy,\n" +
             "nazwa varchar(64) not null,\n" +
             "opis varchar(4096) not null\n" +
             ");";
-    public static final String CHECK_PRODUKTY_PRZEPIS = "CREATE TABLE IF NOT EXISTS produkty_przepis (\n" +
+    static final String CHECK_PRODUKTY_PRZEPIS = "CREATE TABLE IF NOT EXISTS produkty_przepis (\n" +
             "id_przepisu INTEGER REFERENCES przepisy,\n" +
             "id_produktu INTEGER REFERENCES produkty,\n" +
             "ilosc numeric(6,2) not null\n" +
             ");";
-    public static final String CHECK_SKLEP = "CREATE TABLE IF NOT EXISTS sklepy (\n" +
+    static final String CHECK_SKLEP = "CREATE TABLE IF NOT EXISTS sklepy (\n" +
             "id_sklepu serial primary key,\n" +
             "nazwa varchar(64) not null\n" +
             ");";
-    public static final String CHECK_PRODUKTY_SKLEPU = "CREATE TABLE IF NOT EXISTS produkty_sklepu (\n" +
+    static final String CHECK_PRODUKTY_SKLEPU = "CREATE TABLE IF NOT EXISTS produkty_sklepu (\n" +
             "id_sklepu INTEGER REFERENCES sklepy,\n" +
             "id_produktu INTEGER REFERENCES produkty,\n" +
             "ilosc numeric(6,2) not null\n" +
             ");";
 
     //GET
-    public static final String GET_HASLO = "SELECT haslo FROM uzytkownicy u WHERE u.email=?;";
-    public static final String GET_USER_ID = "SELECT u.id_uzytkownika FROM uzytkownicy u WHERE u.email=?;";
+    static final String GET_HASLO = "SELECT haslo FROM uzytkownicy u WHERE u.email=?;";
+    static final String GET_USER_ID = "SELECT u.id_uzytkownika FROM uzytkownicy u WHERE u.email=?;";
     public static final String GET_UZYTKOWNIK = "SELECT u.id_uzytkownika, u.email, u.haslo FROM uzytkownicy u WHERE u.id_uzytkownika=?;";
     public static final String GET_WSZYSCY_UZYTKOWNICY = "SELECT u.id_uzytkownika, u.email, u.haslo FROM uzytkownicy u;";
 
 
     public static final String GET_PRODUKT = "SELECT p.id_produktu, p.nazwa, p.kcal, p.protein, p.fats, p.carbohydrates FROM produkty p WHERE p.id_produktu=?;";
 
-    public static final String GET_WSZYSTKIE_PRODUKTY = "SELECT p.id_produktu, p.nazwa, p.kcal, p.protein, p.fats, p.carbohydrates  FROM produkty p;";
+    static final String GET_WSZYSTKIE_PRODUKTY = "SELECT p.id_produktu, p.nazwa, p.kcal, p.protein, p.fats, p.carbohydrates  FROM produkty p;";
 
-    public static final String GET_PRODUKTY_UZYTKOWNIKA =
-            "SELECT p.id_produktu, p.nazwa, p.kcal, p.protein, p.fats, p.carbohydrates  FROM produkty p " +
+    static final String GET_PRODUKTY_UZYTKOWNIKA =
+            "SELECT p.id_produktu, p.nazwa, pu.ilosc  FROM produkty p " +
             "JOIN produkty_uzytkownika pu ON p.id_produktu = pu.id_produktu " +
             "JOIN uzytkownicy u ON u.id_uzytkownika = pu.id_uzytkownika " +
             "WHERE u.id_uzytkownika=?;";
