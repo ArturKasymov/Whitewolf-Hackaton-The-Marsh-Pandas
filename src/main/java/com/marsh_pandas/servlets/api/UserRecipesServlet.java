@@ -51,7 +51,7 @@ public class UserRecipesServlet extends HttpServlet {
                 list_recipesJSON.put(recipe.getJSON());
             }
         }
-        responseJSON.put("products_recipes", list_recipesJSON);
+        responseJSON.put("user_recipes", list_recipesJSON);
         resp.getWriter().println(responseJSON.toString());
     }
 }

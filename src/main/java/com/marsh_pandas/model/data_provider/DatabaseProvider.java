@@ -39,7 +39,6 @@ public class DatabaseProvider implements UtilScriptDataProvider{
         stmt.execute(CHECK_PRODUKTY_SKLEPU);
     }
 
-
     public String getUserPassword(String email) {
         try {
             PreparedStatement pstmt = connection.prepareStatement(GET_HASLO);

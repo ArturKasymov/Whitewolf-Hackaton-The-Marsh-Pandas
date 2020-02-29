@@ -1,5 +1,7 @@
 package com.marsh_pandas.model.entities;
 
+import org.json.JSONObject;
+
 public class Recipe {
 
         private int id;
@@ -24,11 +26,14 @@ public class Recipe {
             return opis;
         }
 
-        public String getJSON(){
-            return "{" +
-                    "id:" + this.id +","+
-                    "nazwa:" + this.nazwa +","+
-                    "opis:" + this.opis +
-                    "}";
+        public JSONObject getJSON(){
+
+            JSONObject json = new JSONObject();
+
+            json.put("id", id);
+            json.put("name", nazwa);
+            json.put("description", opis);
+
+            return json;
         }
 }

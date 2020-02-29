@@ -6,6 +6,7 @@ import com.marsh_pandas.model.data_provider.DatabaseProvider;
 import com.marsh_pandas.model.entities.Recipe;
 import com.marsh_pandas.model.entities.UtilEntityProduct;
 import com.marsh_pandas.model.repositories.CryptoRepo;
+import com.marsh_pandas.utils;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -26,8 +27,8 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
     private Interactor() throws Exception {
         this.provider = new DatabaseProvider();
 
-        //utils.insertProducts();
-
+        utils.insertProducts();
+        utils.insertReceipts();
     }
 
     @Override
@@ -53,15 +54,11 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
     }
 
     public List<UtilEntityProduct> getUserFridgeProducts(String user_token) {
-
-        List<UtilEntityProduct> list_product=provider.getUserFridgeProducts(user_token);
-        return list_product;
+        return provider.getUserFridgeProducts(user_token);
     }
 
     public List<Product> getAllProducts() {
-
-        List<Product> list_product=provider.getAllProducts();
-        return list_product;
+        return provider.getAllProducts();
     }
 
     public void addProductToUserFridge(int product_id,int user_token, BigDecimal ilosc){
@@ -72,8 +69,7 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
 
     public Recipe getRecipe(int id_recipe){
         try {
-            Recipe recipe=provider.getRecipe(id_recipe);
-            return recipe;
+            return provider.getRecipe(id_recipe);
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -82,8 +78,7 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
 
     public List<Recipe> getRecipesByAuthor(int id_author){
         try {
-            List<Recipe> list_recipe=provider.getRecipesByAuthor(id_author);
-            return list_recipe;
+            return provider.getRecipesByAuthor(id_author);
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -92,8 +87,7 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
 
     public List<Product> getProductsRecipe(int id_recipe){
         try {
-            List<Product> list_products=provider.getProductsRecipe(id_recipe);
-            return list_products;
+            return provider.getProductsRecipe(id_recipe);
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -103,8 +97,7 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
 
     public List<Product> getProductsShop(int id_shop){
         try {
-            List<Product> list_products=provider.getShopProducts(id_shop);
-            return list_products;
+            return provider.getShopProducts(id_shop);
         } catch(Exception e){
             e.printStackTrace();
         }
