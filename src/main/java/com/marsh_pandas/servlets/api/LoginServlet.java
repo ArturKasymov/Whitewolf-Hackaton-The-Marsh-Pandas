@@ -36,13 +36,13 @@ public class LoginServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        System.out.println(email + " " + password);
+        int userID = interactor.checkUserLoginData(email, password);
 
-        if (interactor.checkUserLoginData(email, password)) {
-            resp.getWriter().println("OK");
+        if (userID > 0) {
+            resp.getWriter().println(userID);
         }else
         {
-            resp.getWriter().println("Permission denied");
+            resp.sendError(404);
         }
     }
 }

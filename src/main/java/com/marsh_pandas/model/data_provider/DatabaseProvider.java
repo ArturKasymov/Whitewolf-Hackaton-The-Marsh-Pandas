@@ -56,4 +56,17 @@ public class DatabaseProvider{
         return rs.getInt(1);
     }
 
+    public int getUserID(String email) {
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(GET_USER_ID);
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            if(rs.isClosed()) return -1;
+            return rs.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
 }
