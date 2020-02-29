@@ -10,7 +10,7 @@ public class PostgreSQLQueries {
     public static final String CHECK_PRODUKTY = "CREATE TABLE IF NOT EXISTS produkty (\n" +
             "id_produktu serial primary key,\n" +
             "nazwa varchar(64) not null unique,\n" +
-            "jednostka INTEGER not null\n" +
+            "jednostka varchar(64) not null\n" +
             ");";
     public static final String CHECK_PRODUKTY_UZYTKOWNIKA = "CREATE TABLE IF NOT EXISTS produkty_uzytkownika(\n" +
             "id_produktu INTEGER REFERENCES produkty,\n" +
@@ -39,27 +39,32 @@ public class PostgreSQLQueries {
 
     //GET
     public static final String GET_HASLO = "SELECT haslo FROM uzytkownicy u WHERE u.email=?;";
+
     public static final String GET_USER_ID = "SELECT id_uzytkownika FROM uzytkownicy u WHERE u.email=?;";
 
-    public static final String GET_UZYTKOWNIK = "SELECT u.* FROM uzytkownicy u WHERE u.id_uzytkownika=?;";
-    public static final String GET_WSZYSCY_UZYTKOWNICY = "SELECT u.* FROM uzytkownicy u;";
+    public static final String GET_UZYTKOWNIK = "SELECT u.id_uzytkownika, u.email, u.haslo FROM uzytkownicy u WHERE u.id_uzytkownika=?;";
+    public static final String GET_WSZYSCY_UZYTKOWNICY = "SELECT u.id_uzytkownika, u.email, u.haslo FROM uzytkownicy u;";
 
-    public static final String GET_PRODUKT = "SELECT p.* FROM produkty p WHERE p.id_produktu=?;";
-    public static final String GET_WSZYSTKIE_PRODUKTY = "SELECT * FROM produkty;";
-    public static final String GET_PRODUKTY_UZYTKOWNIKA = "SELECT p.* FROM produkty p " +
+
+    public static final String GET_PRODUKT = "SELECT p.id_produktu, p.nazwa, p.jednostka  FROM produkty p WHERE p.id_produktu=?;";
+    public static final String GET_WSZYSTKIE_PRODUKTY = "SELECT p.id_produktu, p.nazwa, p.jednostka  FROM produkty p;";
+    public static final String GET_PRODUKTY_UZYTKOWNIKA =
+            "SELECT p.id_produktu, p.nazwa, p.jednostka FROM produkty p " +
             "JOIN produkty_uzytkownika pu ON p.id_produktu = pu.id_produktu " +
             "JOIN uzytkownicy u ON u.id_uzytkownika = pu.id_uzytkownika " +
             "WHERE u.id_uzytkownika=?;";
-    public static final String GET_PRODUKTY_PRZEPISY = "SELECT p.* FROM produkty p " +
+    public static final String GET_PRODUKTY_PRZEPISY = "" +
+            "SELECT p.id_produktu, p.nazwa, p.jednostka  FROM produkty p " +
             "JOIN produkty_przepisy pp ON p.id_produktu = pp.id_produktu " +
             "JOIN przepisy pr ON pr.id_przepisu = pp.id_przepisu " +
             "WHERE pr.id_przepisu=?;";
-    public static final String GET_WSZYSTKIE_PRZEPISY = "SELECT * FROM przepisy;";
-    public static final String GET_PRODUKTY_SKLEPU = "SELECT p.* FROM produkty p " +
+    public static final String GET_WSZYSTKIE_PRZEPISY = "SELECT p.id_przepisu, p.nazwa, p.opis FROM przepisy p;";
+    public static final String GET_PRODUKTY_SKLEPU =
+            "SELECT p.id_produktu, p.nazwa, p.jednostka  FROM produkty p " +
             "JOIN produkty_sklepu ps ON p.id_produktu = ps.id_produktu " +
             "JOIN sklepy s ON s.id_sklepu = ps.id_przepisu " +
             "WHERE s.id_sklepu=?;";
-    public static final String GET_WSZYSTKIE_SKLEPY = "SELECT * FROM sklepy;";
+    public static final String GET_WSZYSTKIE_SKLEPY = "SELECT s.id_sklepu, s.nazwa FROM sklepy s;";
 
 
 
