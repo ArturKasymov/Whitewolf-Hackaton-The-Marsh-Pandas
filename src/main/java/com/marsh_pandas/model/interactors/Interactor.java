@@ -1,8 +1,14 @@
 package com.marsh_pandas.model.interactors;
 
+<<<<<<< HEAD
 
+=======
+import com.marsh_pandas.model.Entites.Product;
+>>>>>>> dodana encja Produktu, proste wyciąganie ich z bazy
 import com.marsh_pandas.model.data_provider.DatabaseProvider;
 import com.marsh_pandas.model.repositories.CryptoRepo;
+
+import java.util.List;
 
 
 public class Interactor implements LoginInteractor, RegistrationInteractor {
@@ -41,5 +47,15 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
             e.printStackTrace();
         }
         return -1;
+    }
+
+    public List<Product> getUserFridgeProducts(String user_token) {
+
+        List<Product> list_product=provider.getUserFridgeProducts(user_token);
+        return list_product;
+    }
+
+    public void addProductToUserFridge(int product_id,int user_token, int ilosc){
+        provider.addProductToUserFridge(product_id, user_token, ilosc);
     }
 }

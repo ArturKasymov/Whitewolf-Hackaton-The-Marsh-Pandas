@@ -1,7 +1,10 @@
 package com.marsh_pandas.model.data_provider;
 
+import com.marsh_pandas.model.Entites.Product;
+
 import java.net.URI;
 import java.sql.*;
+import java.util.*;
 
 import static com.marsh_pandas.model.data_provider.PostgreSQLQueries.*;
 
@@ -32,6 +35,7 @@ public class DatabaseProvider{
         stmt.execute(CHECK_PRODUKTY_SKLEPU);
     }
 
+<<<<<<< HEAD
     public String getUserPassword(String email) {
         try {
             PreparedStatement pstmt = connection.prepareStatement(GET_HASLO);
@@ -62,11 +66,45 @@ public class DatabaseProvider{
             pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
             rs.next();
-            if(rs.isClosed()) return -1;
+            if (rs.isClosed()) return -1;
             return rs.getInt(1);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return -1;
+    }
+
+    public List<Product> getUserFridgeProducts(String user_token){
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(GET_PRODUKTY_UZYTKOWNIKA);
+            pstmt.setString(1,user_token);
+            ResultSet rs = pstmt.executeQuery();
+            List<Product> list_products = new ArrayList<Product>();
+            while(rs.next()){
+                int id=rs.getInt(0);
+                String nazwa = rs.getString(1);
+                String jednostka = rs.getString(2);
+                list_products.add(new Product(id,nazwa,jednostka));
+            }
+            return list_products;
+        } catch(Exception e){
+
+        }
+        return null;
+    }
+
+    public boolean addProductToUserFridge(int product_id, int user_token, int ilosc){
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(DODAJ_PRODUKTY_UZYTKOWNIKA);
+            pstmt.setInt(1,product_id);
+            pstmt.setInt(2,user_token);
+            pstmt.setInt(3,ilosc);
+            pstmt.execute();
+
+            return true;
+        } catch(Exception e){
+
+        }
+        return false;
     }
 }
