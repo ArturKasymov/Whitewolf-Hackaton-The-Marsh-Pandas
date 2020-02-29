@@ -147,7 +147,7 @@ public class DatabaseProvider implements UtilScriptDataProvider{
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             if (rs.isClosed()) return null;
-            return new Recipe(rs.getInt(1),rs.getString(2),rs.getString(3));
+            return new Recipe(rs.getInt(1),rs.getString(3),rs.getString(4));
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -229,7 +229,46 @@ public class DatabaseProvider implements UtilScriptDataProvider{
 
     @Override
     public void insertAdminReceipt(String receiptName, String description, List<ReceiptProduct> list_products) {
+        try {
 
+            int receipt_id = insertReceipt(1, receiptName, description);
+
+            //TODO rewrite
+            PreparedStatement pstmtProducts = connection.prepareStatement(GET_WSZYSTKIE_PRODUKTY);
+            ResultSet rsp = pstmtProducts.executeQuery();
+
+            Map<String, Integer> name_to_id = new HashMap<>();
+
+            while (rsp.next()){
+                name_to_id.put(rsp.getString(2), rsp.getInt(1));
+            }
+            for(ReceiptProduct rp : list_products) rp.setID(name_to_id.get(rp.getName()));
+            for(ReceiptProduct rp : list_products) insertReceiptProduct(receipt_id, rp.getID(), rp.getQuantity());
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int insertReceipt(int userID, String receiptName, String description) throws SQLException {
+
+        PreparedStatement pstmt = connection.prepareStatement(DODAJ_PRZEPIS);
+        pstmt.setInt(1, userID); //AdminID
+        pstmt.setString(2, receiptName);
+        pstmt.setString(3, description);
+
+        ResultSet rs = pstmt.executeQuery();
+        rs.next();
+        return rs.getInt(1);
+    }
+
+    private void insertReceiptProduct(int receipt_id, int product_id, BigDecimal quantity ) throws SQLException {
+
+        PreparedStatement pstmt = connection.prepareStatement(DODAJ_PRODUCT_PRZEPISU);
+        pstmt.setInt(1, receipt_id);
+        pstmt.setInt(2, product_id);
+        pstmt.setBigDecimal(3, quantity);
+        pstmt.execute();
     }
 
 }
