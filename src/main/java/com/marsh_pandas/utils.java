@@ -116,9 +116,9 @@ public class utils {
             UtilEntityProduct p8 = new UtilEntityProduct("Cucumbers", new BigDecimal("150"));
             UtilEntityProduct p9 = new UtilEntityProduct("Tomatoes", new BigDecimal("150"));
 
-            lp2.add(p7);
-            lp2.add(p8);
-            lp2.add(p9);
+            lp3.add(p7);
+            lp3.add(p8);
+            lp3.add(p9);
 
             dataProvider.insertAdminReceipt("Yummy Banana", "slice the banana, open yogurt and mix with banana and add cornflakes to create the best meal!", lp1);
             dataProvider.insertAdminReceipt("Jewy fish", "Prepare fish by removing fishbones if necessary, slice tomatoes, boil rice and that's all! ", lp2);

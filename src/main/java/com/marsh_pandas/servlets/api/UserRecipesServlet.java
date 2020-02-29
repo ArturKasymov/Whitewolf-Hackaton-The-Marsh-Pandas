@@ -21,7 +21,7 @@ import static com.marsh_pandas.model.data_provider.PostgreSQLQueries.GET_PRODUKT
 import static com.marsh_pandas.model.data_provider.PostgreSQLQueries.GET_PRZEPIS;
 
 @WebServlet(
-        name = "API_RECIPES",
+        name = "API_USER_RECIPES",
         urlPatterns = "/api/user/recipes"
 )
 
