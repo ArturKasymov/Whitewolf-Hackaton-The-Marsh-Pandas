@@ -19,7 +19,8 @@ public class PostgreSQLQueries {
             ");";
     public static final String CHECK_PRZEPIS = "CREATE TABLE IF NOT EXISTS przepisy (\n" +
             "id_przepisu serial primary key,\n" +
-            "nazwa varchar(64) not null\n" +
+            "nazwa varchar(64) not null,\n" +
+            "opis varchar(4096) not null\n" +
             ");";
     public static final String CHECK_PRODUKTY_PRZEPIS = "CREATE TABLE IF NOT EXISTS produkty_przepis (\n" +
             "id_przepisu INTEGER REFERENCES przepisy,\n" +
@@ -79,27 +80,19 @@ public class PostgreSQLQueries {
     public static final String GET_TOTAL_IMPRESSIONS = "SELECT sum(impressions) from ad_unit_stats;";
 
     //INSERT
-    public static final String INSERT_USER = "INSERT INTO users(user_name, permission_group, password_hash) " +
-            "VALUES (?,?,?) RETURNING user_id;";
-    public static final String INSERT_PROJECT = "INSERT INTO projects(name) VALUES(?) RETURNING id;";
-    public static final String INSERT_PLATFORM = "INSERT INTO platforms(name) VALUES(?) RETURNING id;";
-    public static final String INSERT_APPLICATION = "INSERT INTO applications(name, platform_id, project_id) " +
-            "VALUES (?,?,?) RETURNING id;";
-    public static final String INSERT_AD_UNIT_GROUP = "INSERT INTO ad_unit_groups(name) VALUES(?) RETURNING id;";
-    public static final String INSERT_AD_UNIT = "INSERT INTO ad_units(application_id, name, ad_unit_group_id) " +
-            "VALUES (?,?,?) RETURNING id;";
-    public static final String INSERT_AD_UNIT_STATS = "INSERT INTO ad_unit_stats(ad_unit_id, stat_date, estimated_earnings, " +
-            "impressions, clicks) VALUES(?,?,?,?,?) " +
-            "ON CONFLICT ON CONSTRAINT unique_ad_unit_date " +
-            "DO UPDATE SET " +
-            "estimated_earnings = EXCLUDED.estimated_earnings, " +
-            "impressions = EXCLUDED.impressions, " +
-            "clicks = EXCLUDED.clicks;";
-    public static final String INSERT_USER_CHART = "INSERT INTO user_charts(user_id, name, url) VALUES (?,?,?);";
+    public static final String DODAJ_UZYTKOWNIKA = "INSERT INTO uzytkownicy(email, haslo) " +
+            "VALUES (?,?) RETURNING id_uzytkownika;";
+    public static final String DODAJ_PRODUKT = "INSERT INTO produkty(nazwa,jednostka) VALUES(?,?) RETURNING id_produktu;";
+
+    public static final String DODAJ_PRZEPIS = "INSERT INTO przepisy(nazwa) VALUES(?) RETURNING id_przepisu;";
+
+    public static final String DODAJ_SKLEP = "INSERT INTO sklepy(nazwa) VALUES(?) RETURNING id_sklepu;";
+
+
     //UPDATE
 
     //DELETE
-    public static final String DELETE_USER_CHART = "DELETE FROM user_charts WHERE id=?;";
+    //public static final String USUN_PRODUKT = "DELETE FROM user_charts WHERE id=?;";
 
 
 }
