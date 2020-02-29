@@ -36,6 +36,8 @@ public class LoginServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
+        System.out.println(email + " " + password);
+
         if (interactor.checkUserLoginData(email, password)) {
             resp.getWriter().println("OK");
         }else
