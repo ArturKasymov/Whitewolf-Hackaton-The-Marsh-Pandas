@@ -1,6 +1,9 @@
 package com.marsh_pandas.model.interactors;
 
+import com.marsh_pandas.model.Entites.Product;
 import com.marsh_pandas.model.data_provider.DatabaseProvider;
+
+import java.util.List;
 
 public class Interactor implements LoginInteractor {
 
@@ -20,5 +23,11 @@ public class Interactor implements LoginInteractor {
 
     public boolean checkUserLoginData(String email, String password) {
         return false;
+    }
+
+    public List<Product> getUserFridgeProducts(String user_token) {
+
+        List<Product> list_product=provider.getUserFridgeProducts(user_token);
+        return list_product;
     }
 }
