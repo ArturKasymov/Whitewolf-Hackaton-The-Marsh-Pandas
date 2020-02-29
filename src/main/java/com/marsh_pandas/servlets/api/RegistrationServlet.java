@@ -36,6 +36,8 @@ public class RegistrationServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
+        System.out.println(email + " " + password);
+
         int userID = interactor.registerUser(email, password);
 
         JSONObject respJSON = new JSONObject();
