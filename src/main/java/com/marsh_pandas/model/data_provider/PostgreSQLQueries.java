@@ -91,7 +91,7 @@ public class PostgreSQLQueries {
             "WHERE s.id_sklepu=?;";
 
     static final String GET_PRZEPISY_FOR_USER =
-            "SELECT p.id_przepisu, p.id_uzytkownika, p.nazwa, p.opis , SUM(pp.ilosc*pr.kcal)\n" +
+            "SELECT p.id_przepisu, p.id_uzytkownika, p.nazwa, p.opis , SUM(pp.ilosc*pr.kcal) / 100 \n" +
                     "FROM przepisy p\n" +
                     "join produkty_przepis pp ON pp.id_przepisu=p.id_przepisu\n" +
                     "join produkty pr on pr.id_produktu = pp.id_produktu\n" +
