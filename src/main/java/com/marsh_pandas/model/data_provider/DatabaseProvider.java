@@ -147,7 +147,7 @@ public class DatabaseProvider implements UtilScriptDataProvider{
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             if (rs.isClosed()) return null;
-            return new Recipe(rs.getInt(1),rs.getString(3),rs.getString(4));
+            return new Recipe(rs.getInt(1),rs.getString(3),rs.getString(4), rs.getBigDecimal(5));
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -164,7 +164,7 @@ public class DatabaseProvider implements UtilScriptDataProvider{
                 int id=rs.getInt(1);
                 String nazwa = rs.getString(3);
                 String opis = rs.getString(4);
-                list_recipes.add(new Recipe(id,nazwa,opis));
+                list_recipes.add(new Recipe(id,nazwa,opis, rs.getBigDecimal(5)));
             }
             return list_recipes;
         } catch(Exception e){

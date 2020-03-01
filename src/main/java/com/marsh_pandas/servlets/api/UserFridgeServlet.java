@@ -72,8 +72,8 @@ public class UserFridgeServlet extends HttpServlet {
             JSONObject body =  HTTP.toJSONObject(jb.toString());
             interactor.addProductToUserFridge(body.getInt("product_id"),Integer.parseInt(user_token),body.getBigDecimal("quantity"));
         } catch (JSONException e) {
-            // crash and burn
-            throw new IOException("Error parsing JSON request string");
+            e.printStackTrace();
+            //throw new IOException("Error parsing JSON request string");
         }
     }
 }

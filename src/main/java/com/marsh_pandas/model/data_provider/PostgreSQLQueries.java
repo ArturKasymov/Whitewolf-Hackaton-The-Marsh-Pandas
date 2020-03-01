@@ -64,8 +64,20 @@ public class PostgreSQLQueries {
             "JOIN produkty_przepisy pp ON p.id_produktu = pp.id_produktu " +
             "JOIN przepisy pr ON pr.id_przepisu = pp.id_przepisu " +
             "WHERE pr.id_przepisu=?;";
-    public static final String GET_PRZEPIS = "SELECT p.id_przepisu, p.id_uzytkownika, p.nazwa, p.opis FROM przepisy p WHERE p.id_przepisu=?;";
-    public static final String GET_PRZEPISY_PO_AUTORZE = "SELECT p.id_przepisu, p.id_uzytkownika, p.nazwa, p.opis FROM przepisy p WHERE p.id_uzytkownika=?;";
+
+    public static final String GET_PRZEPIS = "SELECT p.id_przepisu, p.id_uzytkownika, p.nazwa, p.opis , SUM(pp.ilosc*pr.kcal)\n" +
+            "FROM przepisy p \n" +
+            "join produkty_przepis pp ON pp.id_przepisu=p.id_przepisu\n" +
+            "join produkty pr on pr.id_produktu = pp.id_produktu\n" +
+            "WHERE p.id_przepisu=?\n" +
+            "group by p.id_przepisu;\n";
+
+    static final String GET_PRZEPISY_PO_AUTORZE = "SELECT p.id_przepisu, p.id_uzytkownika, p.nazwa, p.opis , SUM(pp.ilosc*pr.kcal)\n" +
+            "FROM przepisy p \n" +
+            "join produkty_przepis pp ON pp.id_przepisu=p.id_przepisu\n" +
+            "join produkty pr on pr.id_produktu = pp.id_produktu\n" +
+            "WHERE p.id_uzytkownika=?\n" +
+            "group by p.id_przepisu;";
     public static final String GET_PRODUKTY_PRZEPISU = "SELECT p.id_produktu, p.nazwa, p.kcal, p.protein, p.fats, p.carbohydrates  FROM produkty p" +
             "JOIN t_produkty_przepis pp ON pp.id_produktu=p.id_produktu" +
             "JOIN t_przepis prz ON prz.id_przepisu=pp.id_przepisu" +
