@@ -28,11 +28,11 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
     private Interactor() throws Exception {
         this.provider = new DatabaseProvider();
 
-        /*
+
         provider.insertUser("admin@gmail.com", CryptoRepo.encryptPassword("12345678"));
         utils.insertProducts();
         utils.insertReceipts();
-        */
+        
     }
 
     @Override
