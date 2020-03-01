@@ -84,7 +84,7 @@ public class PostgreSQLQueries {
             "JOIN t_przepis prz ON prz.id_przepisu=pp.id_przepisu" +
             " WHERE prz.id_przepisu=?;";
     public static final String GET_WSZYSTKIE_PRZEPISY = "SELECT p.id_przepisu, p.id_uzytkownika, p.nazwa, p.opis FROM przepisy p;";
-    public static final String GET_PRODUKTY_SKLEPU =
+    static final String GET_PRODUKTY_SKLEPU =
             "SELECT p.id_produktu, p.nazwa, p.jednostka  FROM produkty p " +
             "JOIN produkty_sklepu ps ON p.id_produktu = ps.id_produktu " +
             "JOIN sklepy s ON s.id_sklepu = ps.id_przepisu " +
@@ -113,6 +113,14 @@ public class PostgreSQLQueries {
                     "order by CAST( count(pp.id_przepisu) as float) / (select pwp.p_count from produkty_w_przepisie pwp where pwp.id_przepisu=pp.id_przepisu) desc\n" +
                     ")\n" +
                     "group by p.id_przepisu;\n";
+
+    static final String GET_RECEIPT_PRODUCTS_BALANCE =
+            "select pp.id_produktu, p.nazwa, coalesce(pu.ilosc,0) - pp.ilosc\n" +
+                    "from produkty_przepis pp\n" +
+                    "join produkty p on p.id_produktu = pp.id_produktu\n" +
+                    "left join produkty_uzytkownika pu on pu.id_produktu = pp.id_produktu\n" +
+                    "where pp.id_przepisu=? and (pu.id_uzytkownika is null or pu.id_uzytkownika = ?)\n" +
+                    "order by 3;";
 
     public static final String GET_WSZYSTKIE_SKLEPY = "SELECT s.id_sklepu, s.nazwa FROM sklepy s;";
 

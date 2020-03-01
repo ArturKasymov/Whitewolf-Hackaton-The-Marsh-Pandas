@@ -3,6 +3,7 @@ package com.marsh_pandas.model.interactors;
 
 import com.marsh_pandas.model.entities.Product;
 import com.marsh_pandas.model.data_provider.DatabaseProvider;
+import com.marsh_pandas.model.entities.ProductBalance;
 import com.marsh_pandas.model.entities.Recipe;
 import com.marsh_pandas.model.entities.UtilEntityProduct;
 import com.marsh_pandas.model.repositories.CryptoRepo;
@@ -69,7 +70,6 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
     }
 
 
-
     public Recipe getRecipe(int id_recipe){
         try {
             return provider.getRecipe(id_recipe);
@@ -107,6 +107,14 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
         return null;
     }
 
+    public List<ProductBalance> getRecipeProductsBalance(int recipt_id, int user_token){
+        try {
+            return provider.getRecipeProductsBalance(recipt_id, user_token);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public List<Product> getProductsShop(int id_shop){
         try {

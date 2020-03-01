@@ -1,6 +1,7 @@
 package com.marsh_pandas.model.data_provider;
 
 import com.marsh_pandas.model.entities.Product;
+import com.marsh_pandas.model.entities.ProductBalance;
 import com.marsh_pandas.model.entities.UtilEntityProduct;
 import com.marsh_pandas.model.entities.Recipe;
 
@@ -206,6 +207,22 @@ public class DatabaseProvider implements UtilScriptDataProvider{
         return null;
     }
 
+    public List<ProductBalance> getRecipeProductsBalance(int id_recipe, int user_token){
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(GET_RECEIPT_PRODUCTS_BALANCE);
+            pstmt.setInt(1,id_recipe);
+            pstmt.setInt(2, user_token);
+            ResultSet rs = pstmt.executeQuery();
+            List<ProductBalance> list_products = new ArrayList<>();
+            while(rs.next()){
+                list_products.add(new ProductBalance(rs.getInt(1), rs.getString(2), rs.getBigDecimal(3)));
+            }
+            return list_products;
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     @Override
     public void insertProduct(String productName, BigDecimal kcal, BigDecimal protein, BigDecimal fats, BigDecimal carbohydrates) {
