@@ -25,17 +25,7 @@ import static com.marsh_pandas.model.data_provider.PostgreSQLQueries.GET_PRZEPIS
         urlPatterns = "/api/user/recipes"
 )
 
-public class UserRecipesServlet extends HttpServlet {
-    private Interactor interactor;
-
-    @Override
-    public void init() throws ServletException {
-        try {
-            interactor = Interactor.getInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+public class UserRecipesServlet extends BaseApplicationServlet {
 
 
     @Override

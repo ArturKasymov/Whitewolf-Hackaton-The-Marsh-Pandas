@@ -20,34 +20,11 @@ import java.util.List;
         urlPatterns = "/api/products_list"
 )
 
-public class ProductsListServlet extends HttpServlet {
-
-
-    private Interactor interactor;
-
-    @Override
-    public void init() throws ServletException {
-        try {
-            interactor = Interactor.getInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+public class ProductsListServlet extends BaseApplicationServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        List<Product> list_products=interactor.getAllProducts();
-        JSONObject responseJSON = new JSONObject();
-        JSONArray list_productsJSON = new JSONArray();
-        if(list_products!=null) {
-            for (Product product : list_products) {
-                list_productsJSON.put(product.getJSON());
-            }
-        }
-        responseJSON.put("products_list", list_productsJSON);
-        resp.getWriter().println(responseJSON.toString());
+        resp.getWriter().println(getResponseJSON(interactor.getAllProducts(),"products_list"));
     }
-
 
 }

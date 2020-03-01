@@ -19,18 +19,7 @@ import java.util.List;
         name = "API_USER_RECIPES_PRODUCTS_BALANCE",
         urlPatterns = "/api/user/recipes/products/balance"
 )
-public class UserReceiptProductBalanceServlet extends HttpServlet {
-
-    private Interactor interactor;
-
-    @Override
-    public void init() throws ServletException {
-        try {
-            interactor = Interactor.getInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+public class UserReceiptProductBalanceServlet extends BaseApplicationServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

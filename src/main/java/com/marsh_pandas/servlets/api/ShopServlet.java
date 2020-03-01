@@ -19,18 +19,7 @@ import java.util.List;
         urlPatterns = "/api/shop"
 )
 
-public class ShopServlet extends HttpServlet {
-    private Interactor interactor;
-
-    @Override
-    public void init() throws ServletException {
-        try {
-            interactor = Interactor.getInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+public class ShopServlet extends BaseApplicationServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

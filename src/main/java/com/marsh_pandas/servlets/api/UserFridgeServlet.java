@@ -21,17 +21,8 @@ import java.util.List;
         urlPatterns = "/api/user/fridge"
 )
 
-public class UserFridgeServlet extends HttpServlet {
-    private Interactor interactor;
+public class UserFridgeServlet extends BaseApplicationServlet{
 
-    @Override
-    public void init() throws ServletException {
-        try {
-            interactor = Interactor.getInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -15,19 +15,7 @@ import java.io.IOException;
         name = "API_LOGIN",
         urlPatterns = "/api/login"
 )
-public class LoginServlet extends HttpServlet {
-
-
-    private LoginInteractor interactor;
-
-    @Override
-    public void init() throws ServletException {
-        try {
-            interactor = Interactor.getInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+public class LoginServlet extends BaseApplicationServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -16,19 +16,7 @@ import java.io.IOException;
         name = "API_REGISTRATION",
         urlPatterns = "/api/registration"
 )
-public class RegistrationServlet extends HttpServlet {
-
-    private RegistrationInteractor interactor;
-
-    @Override
-    public void init() throws ServletException {
-        try {
-            interactor = Interactor.getInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+public class RegistrationServlet extends BaseApplicationServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
