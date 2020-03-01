@@ -28,17 +28,7 @@ public class UserFridgeServlet extends BaseApplicationServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String user_token = req.getParameter("user_token");
-
-        List<UtilEntityProduct> list_products=interactor.getUserFridgeProducts(user_token);
-        JSONObject responseJSON = new JSONObject();
-        JSONArray list_productsJSON = new JSONArray();
-        if(list_products!=null) {
-            for (UtilEntityProduct product : list_products) {
-                list_productsJSON.put(product.getJSON());
-            }
-        }
-        responseJSON.put("products_list", list_productsJSON);
-        resp.getWriter().println(responseJSON.toString());
+        resp.getWriter().println(getResponseJSON(interactor.getUserFridgeProducts(user_token),"products_list"));
     }
 
 

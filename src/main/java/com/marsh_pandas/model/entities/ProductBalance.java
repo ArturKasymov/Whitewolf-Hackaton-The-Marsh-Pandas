@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import java.math.BigDecimal;
 
-public class ProductBalance {
+public class ProductBalance extends BaseApplicationEntity{
 
     private int id;
     private String name;

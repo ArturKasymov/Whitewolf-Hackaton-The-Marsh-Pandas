@@ -32,16 +32,6 @@ public class UserRecipesServlet extends BaseApplicationServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String user_token = req.getParameter("user_token");
-
-        List<Recipe> list_recipes=interactor.getRecipesByAuthor(Integer.parseInt(user_token));
-        JSONObject responseJSON = new JSONObject();
-        JSONArray list_recipesJSON = new JSONArray();
-        if(list_recipes!=null) {
-            for (Recipe recipe : list_recipes) {
-                list_recipesJSON.put(recipe.getJSON());
-            }
-        }
-        responseJSON.put("user_recipes", list_recipesJSON);
-        resp.getWriter().println(responseJSON.toString());
+        resp.getWriter().println(getResponseJSON(interactor.getRecipesByAuthor(Integer.parseInt(user_token)), "user_recipes"));
     }
 }

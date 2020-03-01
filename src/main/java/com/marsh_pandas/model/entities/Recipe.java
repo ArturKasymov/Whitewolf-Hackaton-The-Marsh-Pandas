@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import java.math.BigDecimal;
 
-public class Recipe {
+public class Recipe extends BaseApplicationEntity{
 
         private int id;
         private String nazwa;

@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 import java.math.BigDecimal;
 
-public class UtilEntityProduct {
+public class UtilEntityProduct extends BaseApplicationEntity{
 
     private int id = -1;
     private String name = null;

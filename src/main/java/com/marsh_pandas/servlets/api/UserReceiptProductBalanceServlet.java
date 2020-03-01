@@ -27,19 +27,9 @@ public class UserReceiptProductBalanceServlet extends BaseApplicationServlet {
         String user_token = req.getParameter("user_token");
         String receipt_id = req.getParameter("receipt_id");
 
-        List<ProductBalance> list_products = interactor.getRecipeProductsBalance(
+        resp.getWriter().println(getResponseJSON(interactor.getRecipeProductsBalance(
                 Integer.parseInt(receipt_id),
-                Integer.parseInt(user_token));
-
-        JSONObject responseJSON = new JSONObject();
-        JSONArray list_productsJSON = new JSONArray();
-        if(list_products!=null) {
-            for (ProductBalance product : list_products) {
-                list_productsJSON.put(product.getJSON());
-            }
-        }
-        responseJSON.put("products_balance", list_productsJSON);
-        resp.getWriter().println(responseJSON.toString());
+                Integer.parseInt(user_token)), "products_balance"));
     }
 
 }

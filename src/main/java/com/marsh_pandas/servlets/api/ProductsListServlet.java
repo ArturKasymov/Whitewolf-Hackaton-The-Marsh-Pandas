@@ -26,5 +26,4 @@ public class ProductsListServlet extends BaseApplicationServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.getWriter().println(getResponseJSON(interactor.getAllProducts(),"products_list"));
     }
-
 }

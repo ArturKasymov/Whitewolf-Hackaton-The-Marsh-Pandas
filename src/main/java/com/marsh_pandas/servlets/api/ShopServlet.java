@@ -25,16 +25,6 @@ public class ShopServlet extends BaseApplicationServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String user_token = req.getParameter("user_token");
-
-        List<Product> list_products=interactor.getProductsShop(Integer.parseInt(user_token));
-        JSONObject responseJSON = new JSONObject();
-        JSONArray list_recipesJSON = new JSONArray();
-        if(list_products!=null) {
-            for (Product product : list_products) {
-                list_recipesJSON.put(product.getJSON());
-            }
-        }
-        responseJSON.put("products_shop", list_recipesJSON);
-        resp.getWriter().println(responseJSON.toString());
+        resp.getWriter().println(getResponseJSON(interactor.getProductsShop(Integer.parseInt(user_token)), "products_shop"));
     }
 }

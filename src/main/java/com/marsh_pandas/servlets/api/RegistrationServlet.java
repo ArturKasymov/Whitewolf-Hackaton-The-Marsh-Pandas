@@ -24,10 +24,7 @@ public class RegistrationServlet extends BaseApplicationServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        System.out.println(email + " " + password);
-
         int userID = interactor.registerUser(email, password);
-
         JSONObject respJSON = new JSONObject();
         if(userID>0){
             respJSON.put("user_token", userID);
