@@ -70,6 +70,9 @@ public class UserFridgeServlet extends HttpServlet {
         try {
 
             JSONObject body =  HTTP.toJSONObject(jb.toString());
+
+            System.out.println(body.toString());
+
             JSONObject method = body.getJSONObject("Method");
 
             System.out.println(method.getInt("product_id") +"  " + method.getBigDecimal("quantity"));
