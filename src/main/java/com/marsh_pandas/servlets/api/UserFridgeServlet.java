@@ -1,6 +1,5 @@
 package com.marsh_pandas.servlets.api;
 
-import com.marsh_pandas.model.entities.Product;
 import com.marsh_pandas.model.entities.UtilEntityProduct;
 import com.marsh_pandas.model.interactors.Interactor;
 import org.json.HTTP;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.List;
 
 @WebServlet(
@@ -68,10 +66,13 @@ public class UserFridgeServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        try {
-            JSONObject body =  HTTP.toJSONObject(jb.toString());
 
-            System.out.println(body.toString());
+        try {
+
+            JSONObject body =  HTTP.toJSONObject(jb.toString());
+            JSONObject method = body.getJSONObject("Method");
+
+            System.out.println(method.getInt("product_id") +"  " + method.getBigDecimal("quantity"));
 
             //interactor.addProductToUserFridge(body.getInt("product_id"),Integer.parseInt(user_token),body.getBigDecimal("quantity"));
         } catch (JSONException e) {
