@@ -140,6 +140,7 @@ public class DatabaseProvider implements UtilScriptDataProvider{
     }
 
 
+
     public Recipe getRecipe(int id_recipe){
         try {
             PreparedStatement pstmt = connection.prepareStatement(GET_PRZEPIS);
@@ -173,6 +174,21 @@ public class DatabaseProvider implements UtilScriptDataProvider{
         return null;
     }
 
+    public List<Recipe> getRecipesForUser(int user_token){
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(GET_PRZEPISY_FOR_USER);
+            pstmt.setInt(1,user_token);
+            ResultSet rs = pstmt.executeQuery();
+            List<Recipe> list_recipes = new ArrayList<Recipe>();
+            while(rs.next()){
+                list_recipes.add(new Recipe(rs.getInt(1), rs.getString(3),rs.getString(4), rs.getBigDecimal(5)));
+            }
+            return list_recipes;
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public List<Product> getProductsRecipe(int id_recipe){
         try {

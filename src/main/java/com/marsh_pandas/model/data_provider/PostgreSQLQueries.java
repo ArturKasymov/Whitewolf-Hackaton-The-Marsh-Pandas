@@ -65,6 +65,7 @@ public class PostgreSQLQueries {
             "JOIN przepisy pr ON pr.id_przepisu = pp.id_przepisu " +
             "WHERE pr.id_przepisu=?;";
 
+
     public static final String GET_PRZEPIS = "SELECT p.id_przepisu, p.id_uzytkownika, p.nazwa, p.opis , SUM(pp.ilosc*pr.kcal)\n" +
             "FROM przepisy p \n" +
             "join produkty_przepis pp ON pp.id_przepisu=p.id_przepisu\n" +
@@ -88,6 +89,30 @@ public class PostgreSQLQueries {
             "JOIN produkty_sklepu ps ON p.id_produktu = ps.id_produktu " +
             "JOIN sklepy s ON s.id_sklepu = ps.id_przepisu " +
             "WHERE s.id_sklepu=?;";
+
+    static final String GET_PRZEPISY_FOR_USER =
+            "SELECT p.id_przepisu, p.id_uzytkownika, p.nazwa, p.opis , SUM(pp.ilosc*pr.kcal)\n" +
+                    "FROM przepisy p\n" +
+                    "join produkty_przepis pp ON pp.id_przepisu=p.id_przepisu\n" +
+                    "join produkty pr on pr.id_produktu = pp.id_produktu\n" +
+                    "WHERE p.id_przepisu in (\n" +
+                    "with produkty_w_przepisie as (\n" +
+                    "\tselect id_przepisu as \"id_przepisu\", count(id_przepisu) as \"p_count\"\n" +
+                    "\tfrom produkty_przepis\n" +
+                    "\tgroup by id_przepisu\n" +
+                    ")\n" +
+                    "select pp.id_przepisu\n" +
+                    "from produkty_przepis pp\n" +
+                    "join przepisy p on p.id_przepisu=pp.id_przepisu\n" +
+                    "where pp.id_produktu = any(\n" +
+                    "\tselect pu.id_produktu\n" +
+                    "\tfrom produkty_uzytkownika pu \n" +
+                    "\twhere pu.ilosc >= pp.ilosc and pu.id_uzytkownika=?\n" +
+                    ")\n" +
+                    "group by pp.id_przepisu\n" +
+                    "order by CAST( count(pp.id_przepisu) as float) / (select pwp.p_count from produkty_w_przepisie pwp where pwp.id_przepisu=pp.id_przepisu) desc\n" +
+                    ")\n" +
+                    "group by p.id_przepisu;\n";
 
     public static final String GET_WSZYSTKIE_SKLEPY = "SELECT s.id_sklepu, s.nazwa FROM sklepy s;";
 

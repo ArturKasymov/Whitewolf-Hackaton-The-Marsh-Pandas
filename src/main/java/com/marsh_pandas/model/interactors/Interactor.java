@@ -88,6 +88,16 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
         return null;
     }
 
+    public List<Recipe> getRecipesForUser(int user_token){
+        try {
+            return provider.getRecipesForUser(user_token);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     public List<Product> getProductsRecipe(int id_recipe){
         try {
             return provider.getProductsRecipe(id_recipe);
