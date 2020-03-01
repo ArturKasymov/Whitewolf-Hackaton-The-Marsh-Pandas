@@ -159,7 +159,7 @@ public class PostgreSQLQueries {
     public static final String DODAJ_PRODUKTY_UZYTKOWNIKA = "INSERT INTO produkty_uzytkownika(id_produktu,id_uzytkownika, ilosc) " +
             "VALUES (?,?,?);";
 
-
+    public static final String USUN_PRODUKTY_UZYTKOWNIKA = "DELETE FROM produkty_uzytkownika WHERE id_produktu=? AND id_uzytkownika=?; ";
 
     //UPDATE
 

@@ -1,7 +1,9 @@
 package com.marsh_pandas.model.data_provider;
 
 import com.marsh_pandas.model.entities.Product;
+
 import com.marsh_pandas.model.entities.ProductBalance;
+
 import com.marsh_pandas.model.entities.UtilEntityProduct;
 import com.marsh_pandas.model.entities.Recipe;
 
@@ -116,6 +118,20 @@ public class DatabaseProvider implements UtilScriptDataProvider{
             pstmt.setInt(1,product_id);
             pstmt.setInt(2,user_token);
             pstmt.setBigDecimal(3,ilosc);
+            pstmt.execute();
+
+            return true;
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean deleteProductFromUserFridge(int product_id, int user_token, BigDecimal ilosc){
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(USUN_PRODUKTY_UZYTKOWNIKA);
+            pstmt.setInt(1,product_id);
+            pstmt.setInt(2,user_token);
             pstmt.execute();
 
             return true;

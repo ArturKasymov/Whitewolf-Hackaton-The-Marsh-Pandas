@@ -69,6 +69,9 @@ public class Interactor implements LoginInteractor, RegistrationInteractor {
         provider.addProductToUserFridge(product_id, user_token, ilosc);
     }
 
+    public void deleteProductFromUserFridge(int product_id,int user_token, BigDecimal ilosc){
+        provider.deleteProductFromUserFridge(product_id, user_token, ilosc);
+    }
 
     public Recipe getRecipe(int id_recipe){
         try {
