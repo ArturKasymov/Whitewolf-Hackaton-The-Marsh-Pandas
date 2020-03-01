@@ -96,7 +96,7 @@ public class DatabaseProvider implements UtilScriptDataProvider{
     public List<UtilEntityProduct> getUserFridgeProducts(String user_token){
         try {
             PreparedStatement pstmt = connection.prepareStatement(GET_PRODUKTY_UZYTKOWNIKA);
-            pstmt.setString(1,user_token);
+            pstmt.setInt(1, Integer.parseInt(user_token));
             ResultSet rs = pstmt.executeQuery();
             List<UtilEntityProduct> list_products = new ArrayList<>();
             while(rs.next()){

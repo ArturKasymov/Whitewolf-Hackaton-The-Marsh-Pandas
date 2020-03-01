@@ -75,12 +75,9 @@ public class UserFridgeServlet extends HttpServlet {
 
             String methodString = body.getString("Method");
             JSONObject method = new JSONObject(methodString);
-            System.out.println(method.getInt("product_id") +"  " + method.getBigDecimal("quantity"));
-
-            //interactor.addProductToUserFridge(body.getInt("product_id"),Integer.parseInt(user_token),body.getBigDecimal("quantity"));
+            interactor.addProductToUserFridge(method.getInt("product_id"),Integer.parseInt(user_token),method.getBigDecimal("quantity"));
         } catch (JSONException e) {
             e.printStackTrace();
-            //throw new IOException("Error parsing JSON request string");
         }
     }
 }
