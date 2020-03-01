@@ -70,7 +70,10 @@ public class UserFridgeServlet extends HttpServlet {
 
         try {
             JSONObject body =  HTTP.toJSONObject(jb.toString());
-            interactor.addProductToUserFridge(body.getInt("product_id"),Integer.parseInt(user_token),body.getBigDecimal("quantity"));
+
+            System.out.println(body.toString());
+
+            //interactor.addProductToUserFridge(body.getInt("product_id"),Integer.parseInt(user_token),body.getBigDecimal("quantity"));
         } catch (JSONException e) {
             e.printStackTrace();
             //throw new IOException("Error parsing JSON request string");
